@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 module.exports = async (client, message) => {
+    if(message.channel.id == '746217071620128879') message.delete();
     client.commands = new Discord.Collection();
     const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('Command.js'));
     for(const file of commandFiles) {
