@@ -16,6 +16,7 @@ module.exports = async (client, message) => {
     const args = message.content.toLowerCase().split(" ");
     if(!args[0].startsWith(prefix)) return;
     const cmd = args[0].slice(prefix.length);
+    if(!cmd) return;
     if(cmd) {
         if(!client.commands.get(cmd)) return;
         if(args[1] == 'help') {

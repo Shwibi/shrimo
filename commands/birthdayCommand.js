@@ -3,6 +3,8 @@ module.exports = {
     execute(message, client){
         message.delete();
 
+        
+
         if(message.member.roles.cache.has('746214235867971675') || message.member.roles.cache.has('746563022733967472')) return;
         const verify = message.guild.channels.cache.get(ch => ch.name === 'verify') || client.channels.cache.get('746217071620128879');
 
