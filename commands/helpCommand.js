@@ -9,5 +9,10 @@ module.exports = {
             color: 0xfcba03
         };
         message.channel.send({ embed: help });
+        setTimeout(() => {
+            const emb = {
+                
+            }
+        })
     }
 }

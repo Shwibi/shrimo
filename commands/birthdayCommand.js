@@ -1,6 +1,8 @@
 module.exports = {
     name: 'birthday',
     execute(message, client){
+
+
         message.delete();
 
         
@@ -18,19 +20,10 @@ module.exports = {
         const yearc = d.getFullYear();
         const age = yearc - yearb;
         if(age < 13) {
-            try {
                 message.member.roles.add('746563022733967472');
-            } catch (err) {
-                message.channel.send("Not enough permissions/roles. Error: ```" + err + "```");
-            }
+            
         } else {
-            try {
                 message.member.roles.add('746214235867971675');
-            } catch (err) {
-                message.channel.send("Not enough permissions/roles. Error: ```" + err + "```");
-            }
-            
-            
         }
         
     }
