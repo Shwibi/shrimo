@@ -7,10 +7,15 @@ module.exports = {
             message.channel.send('Mention someone, mate, ok? ok. Good.');
             return;
         }
-        if(user.id == message.member.id) {
+        if(user.id === message.author.id) {
             message.channel.send("Why.. just like, why do you wanna eat yourself? Are you ok?");
+            return;
         }
-        const name = user.displayName || user.author.username || user.member.displayName || user.username;
+        const member = message.guild.members.cache.find(u => u == user.id);
+        if(!member) {
+            return;
+        }
+        const name = member.displayName || member.username;
         const eatSend = [
             `*rolls into ${name} and eats*`,
             `Eat the sun! ${name}! Eat the SUN!`,

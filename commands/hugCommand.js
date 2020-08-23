@@ -7,7 +7,8 @@ module.exports = {
             message.channel.send('Mention a user my dude.');
             return;
         }
-        const name = user.displayName || user.username || user.author.username;
+        const member = message.guild.members.cache.find(u => u.id == user.id);
+        const name = member.displayName || member.username || member.author.username;
         const long = name.slice(Math.floor((90*name.length)/100));
 
         if(user.id === message.member.id) {
