@@ -4,7 +4,11 @@ const GuildConfig = require('../models/GuildConfig');
 
 module.exports = async (client, message) => {
     if(!message.guild) {
-        if(message.author.bot) return;
+        if(!isNaN(message.content)) {
+
+        }
+        else {
+            if(message.author.bot) return;
         const embed = {
             author: {
                 name: message.author.username,
@@ -12,7 +16,7 @@ module.exports = async (client, message) => {
             },
             color: 0xfff,
             title: 'DMs',
-            descritpion: "Author ID: " + message.author.id,
+            description: "Author ID: " + message.author.id,
             fields: [
                 {
                     name: "Content",
@@ -20,9 +24,37 @@ module.exports = async (client, message) => {
                 }
             ]
         }
-        const dm_ch = client.channels.cache.get('746934028560498740');
-        dm_ch.send({ embed: embed });
+        message.reply(
+            'Which server would you like to send the message ' + message.content + ' in? You have 15 seconds, please post the guild ID of the server.'
+        ).then(
+            m => m.delete({ timeout: 15000 })
+            
+        )
+        const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 15000 });
+        collector.on('collect', async message => {
+            const ID = message.content;
+            if(isNaN(ID)) return message.send("Not a guild ID! Please try again...");
+            const guild = client.guilds.cache.find(g => g.id == ID);
+            if(!guild) return message.reply('I am not in that guild!');
+            const guildMember = guild.members.cache.find(m => m.id == message.author.id);
+            if(!guildMember) return message.reply("You are not in that guild!");
+
+            const guildConfigDM = await GuildConfig.findOne({guildId: guild.id});
+            const dmChannel = await guildConfigDM.get('logs');
+            if(!dmChannel) return message.reply("That guild doesn't have a collection method setup! Please contact an admin/staff member of the guild to setup a DM logging system.");
+            const dmChan = client.channels.cache.get(dmChannel);
+            dmChan.send({ embed: embed }).then(
+                message.reply(
+                    " :white_check_mark: | Successfully sent the message! " + "\n" +
+                    "Sent to: " + `**${guild.name}**`
+                )
+            );
+            return;
+        });
+        
+        }
         return;
+        
     }
     if(message.channel.id == '746217071620128879') message.delete();
     client.commands = new Discord.Collection();

@@ -82,6 +82,10 @@ module.exports = {
         // const setting = guildConfig.get(use);
 
         if(use == 'prefix') {
+            if(set == "remove") {
+                message.channel.send("You won't be able to use any bot commands if you remove the prefix... So no.");
+                return;
+            }
             console.log(set)
             const prefix = guildConfig.get('prefix');
             guildConfig.updateOne({
@@ -91,6 +95,14 @@ module.exports = {
             )
         }
         else if(use == 'welcome') {
+            if(set == 'remove') {
+                guildConfig.updateOne({
+                    welcome: null
+                }).then(
+                    message.channel.send(':white_check_mark: | Successfully removed welcome channel!')
+                );
+                return;
+            }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
             if(!search) return message.channel.send("No such channel found.");
@@ -101,6 +113,14 @@ module.exports = {
             )
         }
         else if(use == 'muted') {
+            if(set == 'remove') {
+                guildConfig.updateOne({
+                    muted: null
+                }).then(
+                    message.channel.send(':white_check_mark: | Successfully removed muted role!')
+                );
+                return;
+            }
             const newSet = set.substr(3, 18);
             const search = message.guild.roles.cache.find(r => r.id == newSet);
             if(!search)  return message.channel.send("No such role found.");
@@ -115,6 +135,14 @@ module.exports = {
             )
         }
         else if(use == 'defaultrole') {
+            if(set == 'remove') {
+                guildConfig.updateOne({
+                    defaultRole: null
+                }).then(
+                    message.channel.send(':white_check_mark: | Successfully removed default role!')
+                );
+                return;
+            }
             const newSet = set.substr(3, 18);
             const search = message.guild.roles.cache.find(r => r.id == newSet);
             if(!search)  return message.channel.send("No such role found.");
@@ -128,6 +156,14 @@ module.exports = {
             )
         }
         else if(use == 'logs') {
+            if(set == 'remove') {
+                guildConfig.updateOne({
+                    logs: null
+                }).then(
+                    message.channel.send(':white_check_mark: | Successfully removed logs')
+                );
+                return;
+            }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
             if(!search) return message.channel.send("No such channel found.");

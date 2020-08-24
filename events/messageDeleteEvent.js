@@ -1,9 +1,11 @@
 const GuildConfig = require('../models/GuildConfig');
 
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
 
-    const guildConfig = GuildConfig.findOne({ guildId: message.guild.id });
-    const logs = guildConfig.get('logs');
+    const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
+    console.log(guildConfig);
+    let logs = await guildConfig.get('logs');
+    console.log(logs);
     if(!logs) return;
     const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);
     const d = new Date();
@@ -13,6 +15,7 @@ module.exports = (client, message) => {
             name: message.author.tag,
             icon_url: message.author.displayAvatarURL()
         },
+        color: 0xdb0d0d,
         title: 'Message Deleted',
         description: 'Author ID: ' + message.author.id,
         fields: [
@@ -30,7 +33,7 @@ module.exports = (client, message) => {
             },
             {
                 name: "Highest role:",
-                value: message.member.highestRole
+                value: message.member.roles.highest
             }
         ]
     };
