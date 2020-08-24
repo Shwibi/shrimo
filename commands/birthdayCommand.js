@@ -14,10 +14,14 @@ module.exports = {
 
         const birthday = message.content.split(" ")[1].split("/");
         if(!birthday) return;
+        console.log(birthday)
         const d = new Date();
+        console.log(d)
         
         const yearb = birthday[2];
         const yearc = d.getFullYear();
+        console.log(yearb, yearc)
+
         const age = yearc - yearb;
         if(age < 13) {
                 message.member.roles.add('746563022733967472');

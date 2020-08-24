@@ -1,6 +1,7 @@
 module.exports = {
     name: 'send',
     help: 's?send #channel \nSends a message to a channel in the server',
+    description: 'Send messages to channels!',
     execute(message, client) {
         message.delete();
         if(!message.member.hasPermission('ADMINISTRATOR')) {

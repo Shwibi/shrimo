@@ -1,6 +1,7 @@
 module.exports = {
     name: 'eat',
     help: 's?eat @user \nEat.',
+    description: 'Eat.',
     execute(message, client) {
         const user = message.mentions.users.first();
         if(!user) {
@@ -22,7 +23,8 @@ module.exports = {
             `*eats ${name}*`,
             `Yum. <@${user.id}> is yummy.`,
             `HEHEHEHEHEHE *silently noms on ${name}*`,
-            `Be happy, eat ${name}s`
+            `Be happy, eat ${name}s`,
+            `TASTE THE SUUUNNN`
         ]
         const index = Math.floor(Math.random() * (eatSend.length - 1));
         message.channel.send(eatSend[index]);

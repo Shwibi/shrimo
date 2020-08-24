@@ -1,10 +1,11 @@
 module.exports = {
     name: 'hug',
     help: 's?hug @user \nHug people because hugs are fun',
+    description: 'Hug people! Woo!',
     execute(message, client) {
         const user = message.mentions.users.first();
         if(!user) {
-            message.channel.send('Mention a user my dude.');
+            message.channel.send('Mention a user to hug please.');
             return;
         }
         const member = message.guild.members.cache.find(u => u.id == user.id);
@@ -22,10 +23,15 @@ module.exports = {
             `huggiieesss, ${name} was hugged by EVERYONE (also ${message.author.username})`,
             `hugs are good for health, have hugggsss *hugs ${name}*`,
             `HUGSSS *hugs* hi ${name}! HUG hug HUGEUGwdgasgu :D`,
-            `:D hugs! *hugs ${name}*`
+            `:D hugs! *hugs ${name}*`,
+            `hug de boop!`,
+            `HUGGIEESSS ${name}!`,
+            `hugs! *hugs*`,
+            `<@${member.id}> C'MERE! HUG TIME! *tackle hugs*`,
+            `huggiiessss ${name}!`
         ]
 
-        const index = Math.floor(Math.random() * (hugSend.length - 1)); 
+        const index = Math.floor(Math.random() * (hugSend.length)); 
         message.channel.send(hugSend[index]);
         
 

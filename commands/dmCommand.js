@@ -24,8 +24,29 @@ module.exports = {
         const args = message.content.split(" ");
         const msg = args.slice(2).join(" ");
         search.send(msg);
-        message.member.send(msg);
         const d = new Date();
-        message.member.send("This message was sent to user " + user.username + " on " + d);
+
+        if(message.guild.id != '746213635336044665') return;
+        
+        const dm_ch = client.channels.cache.get('746934028560498740');
+        const embed = {
+            author: {
+                name: search.user.username || user.username,
+                icon_url: user.displayAvatarURL()
+            },
+            title: "DM sent",
+            description: `Author ID: ${user.id}`,
+            fields: [
+                {
+                    name: "Content",
+                    value: msg
+                },
+                {
+                    name: "Details",
+                    value: "This message was sent to user " + user.username + " on " + `${d.getDate()} date ${d.getMonth()} month`
+                }
+            ]
+        }
+        dm_ch.send({ embed: embed });
     }
 }
