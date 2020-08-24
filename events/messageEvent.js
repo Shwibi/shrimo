@@ -33,7 +33,7 @@ module.exports = async (client, message) => {
         const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 15000 });
         collector.on('collect', async message => {
             const ID = message.content;
-            if(isNaN(ID)) return message.send("Not a guild ID! Please try again...");
+            if(isNaN(ID)) return message.reply("Not a guild ID! Please try again...");
             const guild = client.guilds.cache.find(g => g.id == ID);
             if(!guild) return message.reply('I am not in that guild!');
             const guildMember = guild.members.cache.find(m => m.id == message.author.id);
@@ -56,7 +56,29 @@ module.exports = async (client, message) => {
         return;
         
     }
-    if(message.channel.id == '746217071620128879') message.delete();
+    // if(message.channel.id == '746217071620128879') message.delete();
+    const gConf = await GuildConfig.findOne({ guildId: message.guild.id });
+    const verify = await gConf.get('verify');
+    if(!verify) {
+
+    }
+    else {
+        const ch = message.guild.channels.cache.find(ch => ch.id == verify);
+        if(message.channel.id == verify) {
+            message.delete();
+        }
+    }
+    const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
+    const prefix = guildConfig.get('prefix');
+    // console.log(client.id);
+    // console.log(client.user.id);
+    // console.log(client.author.id);
+    if(message.content.includes(client.user.id)) {
+        message.channel.send(
+            "Hello! Thanks for pinging me, my prefix for this server is `" + prefix + "` " +
+            ` \nUse ${prefix}help to get my commands!`
+        );
+    }
     client.commands = new Discord.Collection();
     const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('Command.js'));
     for(const file of commandFiles) {
@@ -65,8 +87,7 @@ module.exports = async (client, message) => {
     };
 
     const config = require('../config/config.json');
-    const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
-    const prefix = guildConfig.get('prefix');
+    
 
     const args = message.content.toLowerCase().split(" ");
     if(!args[0].startsWith(prefix)) return;
@@ -81,4 +102,5 @@ module.exports = async (client, message) => {
         }
         client.commands.get(cmd).execute(message, client);
     }
+    
 }

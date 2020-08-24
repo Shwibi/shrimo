@@ -12,7 +12,7 @@ module.exports = {
         const args = message.content.toLowerCase().split(" ");
 
         const settings = [
-            'prefix', 'welcome', 'muted', 'defaultrole', 'logs'
+            'prefix', 'welcome', 'muted', 'defaultrole', 'logs', 'verify'
         ]
 
         const use = args[1];
@@ -39,6 +39,10 @@ module.exports = {
         if(logs)  logs = `<#${guildConfig.get('logs')}>`
         else logs = "Not set"
 
+        let verify = guildConfig.get('verify');
+        if(verify) verify = `<#${guildConfig.get('verify')}>`
+        else verify = "Not set"
+
         if(!use && !set) {
             const current = {
                 title: "Current settings",
@@ -64,10 +68,14 @@ module.exports = {
                     {
                         name: 'Logs channel',
                         value: logs
+                    },
+                    {
+                        name: 'Verification channel',
+                        value: verify
                     }
                 ],
                 footer: {
-                    name: 'To assign/change a setting, type ' + `${prefix}settings <setting> <new value>`
+                    text: 'To assign/change a setting, type ' + `${prefix}settings <setting> <new value>`
                 }
             };
 
@@ -171,6 +179,54 @@ module.exports = {
                 logs: newSet
             }).then(
                 message.channel.send(`:white_check_mark: | Successfully updated logs channel to <#${search.id}>`)
+            )
+        }
+        else if(use == 'verify') {
+            if(set == 'remove') {
+                guildConfig.updateOne({
+                    verify: null
+                }).then(
+                    message.channel.send(':white_check_mark: | Successfully removed verification channel')
+                );
+                return;
+            }
+            const newSet = set.substr(2, 18);
+            const search = message.guild.channels.cache.find(c => c.id == newSet);
+            if(!search) return message.channel.send("No such channel found.");
+            guildConfig.updateOne({
+                verify: newSet
+            }).then(
+                message.channel.send(`:white_check_mark: | Successfully updated verify channel to <#${search.id}>`)
+            ).then(
+                message.channel.send(
+                    "**NOTE** \n" +
+                    "For verification to work properly, you need to have a defaultRole (members role) and a muted role setup." + 
+                    "\nThe verification system is an age verification system, with using year as age gate."
+                )
+            ).then(
+                () => {
+                    const verifyEmbed = {
+                        title: 'Verify to enter!',
+                        description: "Hello fellow user! Welcome to **" + message.guild.name + "**" + " Please verify to continue.",
+                        color: 0x4287f5,
+                        fields: [
+                            {
+                                name: "How do I verify?",
+                                value: `Type ${prefix}birthday dd/mm/yyyy (your birthdate) to continue`
+                            },
+                            {
+                                name: "Example",
+                                value: `For eg. ${prefix}birthday 5/6/2009 if your birthdate is 5th June 2009`
+                            },
+                            {
+                                name: "Why?",
+                                value: `Because yes.`
+                            }
+                        ]
+                    };
+                    search.send({ embed: verifyEmbed });
+                }
+                
             )
         }
 

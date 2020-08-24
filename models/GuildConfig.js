@@ -25,6 +25,10 @@ const GuildConfigSchema = new mongoose.Schema({
     logs: {
         type: String,
         required: false
+    },
+    verify: {
+        type: String,
+        required: false
     }
 })
 
