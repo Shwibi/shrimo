@@ -12,7 +12,7 @@ module.exports = {
 
         const GuildConfig = require('../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
-        const muteRole = guildConfig.get('muted');
+        const muteRole = await guildConfig.get('muted');
         console.log(muteRole);
         setTimeout(() => {
             if(!muteRole) {
@@ -49,7 +49,10 @@ module.exports = {
             } else {
                 
                 const mutedRole = message.guild.roles.cache.find(r => r.id == muteRole);
-                if(!mutedRole) return;
+                if(!mutedRole) {
+                    message.channel.send("Mute role outdated!");
+                    return
+                };
                 muteP.roles.add(mutedRole);
             }
         }, 5000);

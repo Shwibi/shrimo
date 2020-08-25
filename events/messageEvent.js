@@ -57,18 +57,20 @@ module.exports = async (client, message) => {
         
     }
     // if(message.channel.id == '746217071620128879') message.delete();
-    const gConf = await GuildConfig.findOne({ guildId: message.guild.id });
-    const verify = await gConf.get('verify');
+    // const gConf = await GuildConfig.findOne({ guildId: message.guild.id });
+    const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
+    const verify = await guildConfig.get('verify');
     if(!verify) {
 
     }
     else {
         const ch = message.guild.channels.cache.find(ch => ch.id == verify);
         if(message.channel.id == verify) {
+            if(message.author.id == client.user.id) return;
             message.delete();
         }
     }
-    const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
+    
     const prefix = guildConfig.get('prefix');
     // console.log(client.id);
     // console.log(client.user.id);

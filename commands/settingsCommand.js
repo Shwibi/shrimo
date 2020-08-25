@@ -50,32 +50,33 @@ module.exports = {
                 color: 0xeb4034,
                 fields: [
                     {
-                        name: 'Prefix',
+                        name: 'Prefix <prefix>',
                         value: prefix
                     },
                     {
-                        name: 'Welcome Channel',
+                        name: 'Welcome Channel <welcome>',
                         value: welcome
                     },
                     {
-                        name: 'Muted Role',
+                        name: 'Muted Role <muted>',
                         value: muted
                     },
                     {
-                        name: 'Default Role (To be given when a new user joins the server)',
+                        name: 'Default Role (Given when user joins/verifies) <defaultrole>',
                         value: def
                     },
                     {
-                        name: 'Logs channel',
+                        name: 'Logs channel <logs>',
                         value: logs
                     },
                     {
-                        name: 'Verification channel',
+                        name: 'Verification channel <verify>',
                         value: verify
                     }
                 ],
                 footer: {
-                    text: 'To assign/change a setting, type ' + `${prefix}settings <setting> <new value>`
+                    text: 'To assign/change a setting, type ' + `${prefix}settings <setting> <new value>` + 
+                           `To remove a setting, type ${prefix}settings <setting> remove`
                 }
             };
 
@@ -94,7 +95,7 @@ module.exports = {
                 message.channel.send("You won't be able to use any bot commands if you remove the prefix... So no.");
                 return;
             }
-            console.log(set)
+            // console.log(set)
             const prefix = guildConfig.get('prefix');
             guildConfig.updateOne({
                 prefix: set
@@ -131,6 +132,11 @@ module.exports = {
             }
             const newSet = set.substr(3, 18);
             const search = message.guild.roles.cache.find(r => r.id == newSet);
+            const clientM = message.guild.members.cache.me;
+            if(clientM.roles.highest.calculatedPosition <= search.calculatedPosition) {
+                message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
+                return;
+            }
             if(!search)  return message.channel.send("No such role found.");
             // const bot = message.guild.me;
             // console.log(bot);
@@ -153,6 +159,11 @@ module.exports = {
             }
             const newSet = set.substr(3, 18);
             const search = message.guild.roles.cache.find(r => r.id == newSet);
+            const clientM = message.guild.members.cache.me;
+            if(clientM.roles.highest.calculatedPosition <= search.calculatedPosition) {
+                message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
+                return;
+            }
             if(!search)  return message.channel.send("No such role found.");
             // const bot = message.guild.members.cache.find(u => u.id == client.user.id);
             // let botrole = bot.highestRole;
@@ -203,31 +214,31 @@ module.exports = {
                     "For verification to work properly, you need to have a defaultRole (members role) and a muted role setup." + 
                     "\nThe verification system is an age verification system, with using year as age gate."
                 )
-            ).then(
-                () => {
-                    const verifyEmbed = {
-                        title: 'Verify to enter!',
-                        description: "Hello fellow user! Welcome to **" + message.guild.name + "**" + " Please verify to continue.",
-                        color: 0x4287f5,
-                        fields: [
-                            {
-                                name: "How do I verify?",
-                                value: `Type ${prefix}birthday dd/mm/yyyy (your birthdate) to continue`
-                            },
-                            {
-                                name: "Example",
-                                value: `For eg. ${prefix}birthday 5/6/2009 if your birthdate is 5th June 2009`
-                            },
-                            {
-                                name: "Why?",
-                                value: `Because yes.`
-                            }
-                        ]
-                    };
-                    search.send({ embed: verifyEmbed });
-                }
-                
             )
+            const verifyEmbed = {
+                author: {
+                    name: message.guild.name
+                },
+                title: 'Verify to enter!',
+                description: "Hello fellow user! Welcome to **" + message.guild.name + "**" + " Please verify to continue.",
+                color: 0x4287f5,
+                fields: [
+                    {
+                        name: "How do I verify?",
+                        value: `Type ${prefix}birthday dd/mm/yyyy (your birthdate) to continue`
+                    },
+                    {
+                        name: "Example",
+                        value: `For eg. ${prefix}birthday 5/6/2009 if your birthdate is 5th June 2009`
+                    },
+                    {
+                        name: "Why?",
+                        value: `Because yes.`
+                    }
+                ]
+            };
+            search.send({ embed: verifyEmbed });
+                
         }
 
 

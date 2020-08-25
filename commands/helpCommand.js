@@ -31,12 +31,12 @@ module.exports = {
                     },
                     {
                         name: ":brain: Core",
-                        value: 'birthday, help, settings',
+                        value: 'birthday, help, \nsettings, slow',
                         inline: true
                     },
                     {
                         name: ":wrench: Mod",
-                        value: 'dm, send',
+                        value: 'dm, send, mute, unmute',
                         inline: true
                     },
                     {
@@ -50,7 +50,8 @@ module.exports = {
                     },
                     {
                         name: `Support server`,
-                        value: '[Join](https://discord.gg/FtJ3QGc)'
+                        value: '[Join](https://discord.gg/FtJ3QGc)',
+                        inline: true
                     }
                 ]
             };

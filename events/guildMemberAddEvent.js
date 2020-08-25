@@ -6,6 +6,10 @@ module.exports = async (client, member) => {
     const welcome = guildConfig.get('welcome');
     const defaultRole = guildConfig.get('defaultRole');
     const role = member.guild.roles.cache.find(r => r.id == defaultRole);
+    const verify = guildConfig.get('verify');
+    const welcomeChannel = member.guild.channels.cache.find(ch => ch.id == welcome);
+    welcomeChannel.send(`Hey <@${member.id}>! Welcome to **${member.guild.name}**!`);
+    if(verify) return;
 
     if(!defaultRole) {
         //do nothing
@@ -15,8 +19,7 @@ module.exports = async (client, member) => {
 
     if(!welcome) return console.log("nope");
 
-    const welcomeChannel = member.guild.channels.cache.find(ch => ch.id == welcome);
-    welcomeChannel.send(`Hey <@${member.id}>! Welcome to **${member.guild.name}**!`);
+    
 
     
 
