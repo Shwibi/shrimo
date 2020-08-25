@@ -31,7 +31,7 @@ module.exports = {
                     },
                     {
                         name: ":brain: Core",
-                        value: 'birthday, help, settings, \nslow, suggest, invite',
+                        value: 'birthday, help, settings, \nslow, suggest, invite, suggestion',
                         inline: true
                     },
                     {
