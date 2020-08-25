@@ -15,7 +15,7 @@ module.exports = {
         })
         message.channel.send(' :white_check_mark: | Successfully logged your suggestion, thanks for suggesting something! Please be patient for a few seconds while we fetch your application id... <3')
         setTimeout(async () => {
-            const userSuggestion = await Suggestions.findOne({ userId: message.author.id });
+            const userSuggestion = await Suggestions.findOne({ messageId: message.id });
             if(!userSuggestion) {
                 return message.channel.send(" :x: | Could not fetch suggestion id!");
             }
