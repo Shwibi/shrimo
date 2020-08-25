@@ -13,9 +13,9 @@ const mongoose = require('mongoose');
 //   const collection = c.db("test").collection("devices");
 //   // perform actions on the collection object
 //   c.close();
-// });
+// }); ShwiConfigs
 
-const URL = 'mongodb+srv://shwi:shwishwi@cluster0.2q4wh.gcp.mongodb.net/ShwiConfigs?retryWrites=true&w=majority';
+const URL = 'mongodb+srv://shwi:shwishwi@cluster0.2q4wh.gcp.mongodb.net/ShwiConfigs?retryWrites=true&w=majority'
 mongoose.connect(URL, { 
     useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
 }
