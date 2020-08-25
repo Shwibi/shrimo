@@ -8,7 +8,7 @@ module.exports = {
         const args = message.content.split(" ");
         const suggestionID = args[1];
         if(!args[1]) return message.channel.send("Please mention the ID of your suggestion to search!");
-        const suggestionValve = await Suggestions.find({ _id: suggestionID});
+        const suggestionValve = await Suggestions.findOne({ _id: suggestionID});
         const sugUser = suggestionValve.get('userId');
         if(userId == message.author.id) {
             if(!suggestionValve) return message.channel.send("No suggestion found!");
