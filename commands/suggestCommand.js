@@ -5,15 +5,6 @@ module.exports = {
         const Suggestions = require('../models/Suggestions');
         const args = message.content.split(" ");
         if(!args[1]) return message.channel.send("We appreciate your thought, but please add a suggestion to suggest something or 'get' to get a suggestion you suggested before :sweat_smile:");
-        if(args[1] == 'get') {
-            const getID = args[2];
-            if(!getID) return message.channel.send("Please mention the suggestion id.");
-            const checkId = await Suggestions.findOne({ userId: message.author.id, _id: getID});
-            if(!checkId) {
-                return message.channel.send("No suggestion with that ID found!");
-            }
-            return;
-        }
         const suggestion = args.slice(1).join(" ");
         const suggest = await Suggestions.create({
             userTag: message.author.tag,
