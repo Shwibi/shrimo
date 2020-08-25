@@ -13,15 +13,15 @@ module.exports = {
         if(message.channel.id != verify) return;
 
         const member = await guildConfig.get('defaultRole');
-        const muted = await guildConfig.get('muted');
+        const underage = await guildConfig.get('underage');
         const memberRole = message.guild.roles.cache.find(r => r.id == member);
-        const mutedRole = message.guild.roles.cache.find(r => r.id == muted);
+        const underageRole = message.guild.roles.cache.find(r => r.id == underage);
 
-        if(!member || !muted) {
+        if(!member || !underage) {
             return message.reply("No verify roles found");
         }
 
-        if(message.member.roles.cache.has(member) || message.member.roles.cache.has(muted)) return console.log('No');
+        if(message.member.roles.cache.has(member) || message.member.roles.cache.has(underage)) return console.log('No');
 
         
         // const verify = message.guild.channels.cache.get(ch => ch.name === 'verify') || client.channels.cache.get('746217071620128879');
@@ -41,7 +41,7 @@ module.exports = {
 
         const age = yearc - yearb;
         if(age < 13) {
-                message.member.roles.add(mutedRole);
+                message.member.roles.add(underageRole);
             
         } else {
                 message.member.roles.add(memberRole);

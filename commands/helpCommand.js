@@ -31,12 +31,12 @@ module.exports = {
                     },
                     {
                         name: ":brain: Core",
-                        value: 'birthday, help, \nsettings, slow',
+                        value: 'birthday, help, settings, \nslow, suggest, invite',
                         inline: true
                     },
                     {
                         name: ":wrench: Mod",
-                        value: 'dm, send, mute, unmute',
+                        value: 'dm, send, mute, \nunmute',
                         inline: true
                     },
                     {
@@ -53,7 +53,10 @@ module.exports = {
                         value: '[Join](https://discord.gg/FtJ3QGc)',
                         inline: true
                     }
-                ]
+                ],
+                footer: {
+                    text: "To get help with a particular command type `" + `${prefix}command help` + "`"
+                }
             };
 
             message.channel.send({ embed: em });

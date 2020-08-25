@@ -29,6 +29,10 @@ const GuildConfigSchema = new mongoose.Schema({
     verify: {
         type: String,
         required: false
+    },
+    underage: {
+        type: String,
+        required: false
     }
 })
 

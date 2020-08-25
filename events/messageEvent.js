@@ -90,7 +90,7 @@ module.exports = async (client, message) => {
 
     const config = require('../config/config.json');
     
-
+    if(message.author.bot) return;
     const args = message.content.toLowerCase().split(" ");
     if(!args[0].startsWith(prefix)) return;
     const cmd = args[0].slice(prefix.length);
@@ -101,8 +101,10 @@ module.exports = async (client, message) => {
             if(!client.commands.get(cmd).help) return message.channel.send("No help command for that module found.");
             message.channel.send(client.commands.get(cmd).help);
             return;
+        } else {
+            client.commands.get(cmd).execute(message, client);
         }
-        client.commands.get(cmd).execute(message, client);
+        
     }
     
 }

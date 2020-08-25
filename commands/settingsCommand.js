@@ -12,7 +12,7 @@ module.exports = {
         const args = message.content.toLowerCase().split(" ");
 
         const settings = [
-            'prefix', 'welcome', 'muted', 'defaultrole', 'logs', 'verify'
+            'prefix', 'welcome', 'muted', 'defaultrole', 'logs', 'verify', 'underage'
         ]
 
         const use = args[1];
@@ -43,6 +43,10 @@ module.exports = {
         if(verify) verify = `<#${guildConfig.get('verify')}>`
         else verify = "Not set"
 
+        let underage = guildConfig.get('underage');
+        if(underage) underage = `<@&${underage}>`
+        else underage = "Not set"
+
         if(!use && !set) {
             const current = {
                 title: "Current settings",
@@ -72,6 +76,10 @@ module.exports = {
                     {
                         name: 'Verification channel <verify>',
                         value: verify
+                    },
+                    {
+                        name: 'Under 13 y/o role (verify channel) <underage>',
+                        value: underage
                     }
                 ],
                 footer: {
@@ -133,10 +141,10 @@ module.exports = {
             const newSet = set.substr(3, 18);
             const search = message.guild.roles.cache.find(r => r.id == newSet);
             const clientM = message.guild.members.cache.me;
-            if(clientM.roles.highest.calculatedPosition <= search.calculatedPosition) {
-                message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
-                return;
-            }
+            // if(clientM.roles.highest.calculatedPosition <= search.calculatedPosition) {
+            //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
+            //     return;
+            // }
             if(!search)  return message.channel.send("No such role found.");
             // const bot = message.guild.me;
             // console.log(bot);
@@ -160,10 +168,10 @@ module.exports = {
             const newSet = set.substr(3, 18);
             const search = message.guild.roles.cache.find(r => r.id == newSet);
             const clientM = message.guild.members.cache.me;
-            if(clientM.roles.highest.calculatedPosition <= search.calculatedPosition) {
-                message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
-                return;
-            }
+            // if(clientM.roles.highest.calculatedPosition <= search.calculatedPosition) {
+            //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
+            //     return;
+            // }
             if(!search)  return message.channel.send("No such role found.");
             // const bot = message.guild.members.cache.find(u => u.id == client.user.id);
             // let botrole = bot.highestRole;
@@ -211,7 +219,7 @@ module.exports = {
             ).then(
                 message.channel.send(
                     "**NOTE** \n" +
-                    "For verification to work properly, you need to have a defaultRole (members role) and a muted role setup." + 
+                    "For verification to work properly, you need to have a defaultRole (members role) and a underage role setup." + 
                     "\nThe verification system is an age verification system, with using year as age gate."
                 )
             )
@@ -239,6 +247,34 @@ module.exports = {
             };
             search.send({ embed: verifyEmbed });
                 
+        }
+        else if(use == 'underage') {
+            if(set == 'remove') {
+                guildConfig.updateOne({
+                    underage: null
+                }).then(
+                    message.channel.send(':white_check_mark: | Successfully removed underage role!')
+                );
+                return;
+            }
+            const newSet = set.substr(3, 18);
+            console.log(newSet);
+            const search = message.guild.roles.cache.find(r => r.id == newSet);
+            console.log(search.name);
+            const clientM = message.guild.members.cache.me;
+            // if(clientM.roles.highest.calculatedPosition <= search.calculatedPosition) {
+            //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
+            //     return;
+            // }
+            if(!search)  return message.channel.send("No such role found.");
+            // const bot = message.guild.members.cache.find(u => u.id == client.user.id);
+            // let botrole = bot.highestRole;
+            // if(search.calculatedPosition > botrole.calculatedPosition) return message.channel.send('My role is below the given role, please put my role above the mentioned role.');
+            guildConfig.updateOne({
+                underage: newSet
+            }).then(
+                message.channel.send(`:white_check_mark: | Successfully updated underage role to <@&${search.id}>`)
+            )
         }
 
 
