@@ -35,6 +35,8 @@ var ipAddr = req.headers["x-forwarded-for"];
   if (ipAddr){
     var list = ipAddr.split(",");
     ipAddr = list[list.length-1];
+    console.log(ipAddr);
   } else {
     ipAddr = req.connection.remoteAddress;
+    console.log(ipAddr);
   }
