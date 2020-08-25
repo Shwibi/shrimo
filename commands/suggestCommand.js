@@ -19,11 +19,10 @@ module.exports = {
             if(!userSuggestion) {
                 return message.channel.send(" :x: | Could not fetch suggestion id!");
             }
-            const id = userSuggestion.get('_id');
+            const id = userSuggestion.get('messageId');
             if(!id) {
                 return message.channel.send(" :x: | Could not fetch suggestion id!");
             }
-            const ID = userSuggestion.get('ObejctId');
             message.member.send("Here's your app id: " + id);
         }, 3000)
     }
