@@ -33,6 +33,14 @@ const GuildConfigSchema = new mongoose.Schema({
     underage: {
         type: String,
         required: false
+    },
+    ticket_channel: {
+        type: String,
+        required: false
+    },
+    ticket_logs: {
+        type: String,
+        required: false
     }
 })
 

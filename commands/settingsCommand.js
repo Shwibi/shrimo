@@ -12,7 +12,7 @@ module.exports = {
         const args = message.content.toLowerCase().split(" ");
 
         const settings = [
-            'prefix', 'welcome', 'muted', 'defaultrole', 'logs', 'verify', 'underage'
+            'prefix', 'welcome', 'muted', 'defaultrole', 'logs', 'verify', 'underage', 'ticket', 'ticketlogs'
         ]
 
         const use = args[1];
@@ -47,6 +47,14 @@ module.exports = {
         if(underage) underage = `<@&${underage}>`
         else underage = "Not set"
 
+        let ticket = guildConfig.get('ticket_channel');
+        if(ticket) ticket = `<#${ticket}>`
+        else ticket = "Not set"
+
+        let ticketLogs = guildConfig.get('ticket_logs');
+        if(ticketLogs) ticketLogs = `<#${ticketLogs}>`
+        else ticketLogs = "Not set"
+
         if(!use && !set) {
             const current = {
                 title: "Current settings",
@@ -80,6 +88,14 @@ module.exports = {
                     {
                         name: 'Under 13 y/o role (verify channel) <underage>',
                         value: underage
+                    },
+                    {
+                        name: "Mod Support (Ticket) Channel <ticket>",
+                        value: ticket
+                    },
+                    {
+                        name: "Ticket logging channels (and claiming) <ticketlogs>",
+                        value: ticketLogs
                     }
                 ],
                 footer: {
@@ -274,6 +290,44 @@ module.exports = {
                 underage: newSet
             }).then(
                 message.channel.send(`:white_check_mark: | Successfully updated underage role to <@&${search.id}>`)
+            )
+        }
+        else if(use == 'ticket') {
+            if(set == 'remove') {
+                guildConfig.updateOne({
+                    ticket_channel: null
+                }).then(
+                    message.channel.send(':white_check_mark: | Successfully removed mod support channel')
+                );
+                return;
+            }
+            const newSet = set.substr(2, 18);
+            const search = message.guild.channels.cache.find(c => c.id == newSet);
+            if(!search) return message.channel.send("No such channel found.");
+            guildConfig.updateOne({
+                ticket_channel: newSet
+            }).then(
+                message.channel.send(`:white_check_mark: | Successfully updated mod support channel to <#${search.id}>`)
+            )
+        }
+        else if(use == 'ticketlogs') {
+            if(set == 'remove') {
+                guildConfig.updateOne({
+                    ticket_logs: null
+                }).then(
+                    message.channel.send(':white_check_mark: | Successfully removed ticket logging')
+                ).then(
+                    message.channel.send("Please note that ticketing will not work without a ticket logging channel (claiming needed)")
+                );
+                return;
+            }
+            const newSet = set.substr(2, 18);
+            const search = message.guild.channels.cache.find(c => c.id == newSet);
+            if(!search) return message.channel.send("No such channel found.");
+            guildConfig.updateOne({
+                ticket_logs: newSet
+            }).then(
+                message.channel.send(`:white_check_mark: | Successfully updated ticket logging channel to <#${search.id}>`)
             )
         }
 
