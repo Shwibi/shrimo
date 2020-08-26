@@ -4,9 +4,9 @@ module.exports = async (client, reaction) => {
         message.embeds.forEach(embed => {
             if(embed.description.includes('<#') && embed.description.includes('>')) {
                 const channel = embed.description.substr(embed.description.indexOf('#'), embed.description.indexOf('>'));
-                console.log(channel);
+                // console.log(channel);
                 if(reaction.emoji.name == '🎯') {
-                    console.log("Claim");
+                    // console.log("Claim");
                     const channelId = channel.substr(1, 18);
                     const ticketChannel = message.guild.channels.cache.find(ch => ch.id == channelId);
                     if(!ticketChannel) return message.channel.send("No ticket found...");
