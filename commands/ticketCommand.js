@@ -137,11 +137,12 @@ module.exports = {
                 
                 if(message.channel.name.includes('ticket-')) {
                     const chID = message.channel.id;
+                    const chName = message.channel.name;
                     logChannel.send(`Closing ticket <#${chID}>`).then(
                         m => {
                             message.channel.delete().then(
                                 message.member.send(":white_check_mark: | Successfully closed ticket.")
-                            ).then(m.edit(`:white_check_mark: | Successfully closed <#${chID}>`))
+                            ).then(m.edit(`:white_check_mark: | Successfully closed <#${chID}> [#${chName}]`))
                         }
                     )
                     
