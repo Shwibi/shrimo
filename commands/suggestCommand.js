@@ -23,7 +23,7 @@ module.exports = {
             if(!id) {
                 return message.channel.send(" :x: | Could not fetch suggestion id!");
             }
-            message.member.send("Here's your app id: " + id);
+            message.member.send("Here's your app id: " + id + `\n **For:** \n ${suggestion}`);
         }, 3000)
     }
 }
