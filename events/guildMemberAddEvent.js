@@ -8,7 +8,12 @@ module.exports = async (client, member) => {
     const role = member.guild.roles.cache.find(r => r.id == defaultRole);
     const verify = guildConfig.get('verify');
     const welcomeChannel = member.guild.channels.cache.find(ch => ch.id == welcome);
-    welcomeChannel.send(`Hey <@${member.id}>! Welcome to **${member.guild.name}**!`);
+    if(!welcomeChannel) {
+
+    } else {
+        welcomeChannel.send(`Hey <@${member.id}>! Welcome to **${member.guild.name}**!`);
+    }
+    
     if(verify) return;
 
     if(!defaultRole) {
