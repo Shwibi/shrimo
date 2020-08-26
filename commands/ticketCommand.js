@@ -15,13 +15,10 @@ module.exports = {
         const logs = await guildConfig.get('ticket_logs');
         const Tickets = require('../models/Tickets');
         const userTickets = await Tickets.findOne({ userId: message.author.id, guildId: message.guild.id })
-        if(!userTickets) {
-
-        }
-        else {
-            let x = userTickets.get('count');
-        }
         
+        const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);
+        
+        let x;
 
         if(!ticket || !logs) return message.delete().then(message.channel.send(" :x: | Ticketing not setup for this server!"))
         if(args[1] == 'create') {
@@ -32,9 +29,49 @@ module.exports = {
                     guildId: message.guild.id,
                     count: 1
                 });
+                x = 1;
+                message.guild.channels.create(`ticket-${message.author.username}-${x}`, {
+                    type: 'text',
+                    permissionOverwrites: [
+                        {
+                            id: message.guild.id,
+                            deny: ['VIEW_CHANNEL'],
+                        },
+                        {
+                            id: message.author.id,
+                            allow: ['VIEW_CHANNEL'],
+                        },
+                    ],
+                }).then(
+                    ch => {
+                        // const ticketClaimChannel = message.guild.channels.cache.find(ch => ch.name == 'ticket-claiming');
+    
+                        const embed = {
+                            author: {
+                                name: message.author.tag,
+                                icon_url: message.author.displayAvatarURL()
+                            },
+                            title: 'New ticket created!',
+                            description: `Ticket created: <#${ch.id}>`,
+                            color: 0x60f542,
+                            fields: [
+                                {
+                                    name: 'Ticket',
+                                    value: `<#${ch.id}>`
+                                }
+                            ]
+                        };
+                        logChannel.send({ embed: embed }).then(
+                            m => {
+                                m.react('🎯');
+                            }
+                        );
+                        ch.send(`<@${message.author.id}> Support will be right with you!`)
+                    }
+                );
             } else {
-                
-                console.log(x);
+                x = await userTickets.get('count');
+                // console.log(x);
                 const newCount = x + 1;
                 console.log(newCount);
                 if(x == 3) return message.channel.send(" :x: | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
@@ -43,11 +80,11 @@ module.exports = {
                     count: newCount
                 })
             }
-            if(message.channel.id != ticket) return message.delete().then(message.channel.send(':x: | Please use the ticket channel for opening tickets.'))
+            x = await userTickets.get('count');
+            if(message.channel.id != ticket) return message.delete().then(message.channel.send(':x: | Please use the ticket channel for opening tickets.').then(m => m.delete({ timeout: 5000 })))
 
             message.delete();
 
-            const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);
 
             message.guild.channels.create(`ticket-${message.author.username}-${x}`, {
                 type: 'text',
@@ -124,6 +161,9 @@ module.exports = {
                 message.channel.send(" :white_check_mark: | Succesfully closed a ticket from database! User Ticket Count: " + newTicketCount)
             )
 
+        }
+        else {
+            return message.channel.send(" :x: | Could not rexognise that command, please use create/close/closed").then(m => m.delete({ timeout: 5000 }));
         }
 
     }
