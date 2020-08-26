@@ -60,6 +60,23 @@ module.exports = {
 
 
         }
+        else if(args[1] == 'close') {
+            if(!message.member.hasPermission("KICK_MEMBERS")) return;
+            const channel = args[2].substr(2, 18);
+            const guildChannel = message.guild.channels.cache.find(ch => ch.id == channel);
+            if(!guildChannel) return message.channel.send(":x: | Please mention the channel to close (this channel)");
+            if(guildChannel.id == message.channel.id) {
+                if(message.channel.name.includes('ticket-')) {
+                    message.channel.delete().then(
+                        message.member.send(":white_check_mark: | Successfully closed ticket.")
+                    );
+                } else {
+                    message.channel.send(":x: | You are not in a ticket channel!");
+                }
+            } else {
+                message.channel.send(":x: | Channels dont match!");
+            }
+        }
 
     }
 }
