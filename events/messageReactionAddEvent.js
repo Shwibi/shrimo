@@ -18,6 +18,8 @@ module.exports = async (client, reaction) => {
                                 VIEW_CHANNEL: true
                             }).then(
                                 ticketChannel.send(`<@${user.id}> has been assigned to assist you!`)
+                            ).then(
+                                reaction.remove(user)
                             )
                         }
                         
