@@ -13,7 +13,7 @@ module.exports = {
         const Tickets = require('../models/Tickets');
         const userTickets = await Tickets.findOne({ userId: message.author.id, guildId: message.guild.id })
         if(!userTickets) {
-            const userTicket = new Tickets({
+            const userTicket = await Tickets.create({
                 userTag: message.author.tag,
                 userId: message.author.id,
                 guildId: message.guild.id,
