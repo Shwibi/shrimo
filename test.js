@@ -21,7 +21,7 @@ eat.on('messageReactionAdd', reaction => {
                     console.log("Claim");
                     const channelId = channel.substr(1, 18);
                     const ticketChannel = message.guild.channels.cache.find(ch => ch.id == channelId);
-                    if(!ticketChannel) return message.channel.send("No ticket found...");
+                    if(!ticketChannel) return message.channel.send(":x: | No ticket found...");
                     reaction.users.cache.forEach(user => {
                         if(user.bot) {
 
@@ -59,46 +59,54 @@ eat.on('message', message => {
 
         if(args[1] == 'create') {
 
-            console.log("create");
+            const userTickets = message.guild.channels.cache.find(ch => ch.name == `ticket-${message.author.username}`);
+            if(userTickets) {
+                message.channel.send(":x: You already have a ticket open!");
+                return;
+            }
 
-            message.guild.channels.create(`ticket-${message.author.username}`, {
-                type: 'text',
-                permissionOverwrites: [
-                    {
-                        id: message.guild.id,
-                        deny: ['VIEW_CHANNEL'],
-                    },
-                    {
-                        id: message.author.id,
-                        allow: ['VIEW_CHANNEL'],
-                    },
-                ],
-            }).then(
-                ch => {
-                    const ticketClaimChannel = message.guild.channels.cache.find(ch => ch.name == 'ticket-claiming');
-
-                    const embed = {
-                        author: {
-                            name: message.author.tag,
-                            icon_url: message.author.displayAvatarURL()
+            setTimeout(() => {
+                message.guild.channels.create(`ticket-${message.author.username}`, {
+                    type: 'text',
+                    permissionOverwrites: [
+                        {
+                            id: message.guild.id,
+                            deny: ['VIEW_CHANNEL'],
                         },
-                        title: 'New ticket created!',
-                        description: `Ticket created: <#${ch.id}>`,
-                        color: 0x60f542,
-                        fields: [
-                            {
-                                name: 'Ticket',
-                                value: `<#${ch.id}>`
+                        {
+                            id: message.author.id,
+                            allow: ['VIEW_CHANNEL'],
+                        },
+                    ],
+                }).then(
+                    ch => {
+                        const ticketClaimChannel = message.guild.channels.cache.find(ch => ch.name == 'ticket-claiming');
+    
+                        const embed = {
+                            author: {
+                                name: message.author.tag,
+                                icon_url: message.author.displayAvatarURL()
+                            },
+                            title: 'New ticket created!',
+                            description: `Ticket created: <#${ch.id}>`,
+                            color: 0x60f542,
+                            fields: [
+                                {
+                                    name: 'Ticket',
+                                    value: `<#${ch.id}>`
+                                }
+                            ]
+                        };
+                        ticketClaimChannel.send({ embed: embed }).then(
+                            m => {
+                                m.react('🎯');
                             }
-                        ]
-                    };
-                    ticketClaimChannel.send({ embed: embed }).then(
-                        m => {
-                            m.react('🎯');
-                        }
-                    );
-                }
-            );
+                        );
+                    }
+                );
+            }, 5000);
+
+            
 
             
             
@@ -108,18 +116,19 @@ eat.on('message', message => {
         else if(args[1] == 'close') {
             if(!message.member.hasPermission("KICK_MEMBERS")) return;
             const channel = args[2].substr(2, 18);
+            if(!channel) return message.channel.send(":x: | Please mention the channel to close (this channel)");
             const guildChannel = message.guild.channels.cache.find(ch => ch.id == channel);
-            if(!guildChannel) return message.channel.send("Please mention the channel to close (this channel)");
+            if(!guildChannel) return message.channel.send(":x: | Please mention the channel to close (this channel)");
             if(guildChannel.id == message.channel.id) {
                 if(message.channel.name.includes('ticket-')) {
                     message.channel.delete().then(
                         message.member.send(":white_check_mark: | Successfully closed ticket.")
                     );
                 } else {
-                    message.channel.send("You are not in a ticket channel!");
+                    message.channel.send(":x: | You are not in a ticket channel!");
                 }
             } else {
-                message.channel.send("Channels dont match!");
+                message.channel.send(":x: | Channels dont match!");
             }
         }
 

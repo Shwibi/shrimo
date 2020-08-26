@@ -10,6 +10,22 @@ module.exports = {
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
         const ticket = await guildConfig.get('ticket_channel');
         const logs = await guildConfig.get('ticket_logs');
+        const Tickets = require('../models/Tickets');
+        const userTickets = await Tickets.findOne({ userId: message.author.id, guildId: message.guild.id })
+        if(!userTickets) {
+            const userTicket = new Tickets({
+                userTag: message.author.tag,
+                userId: message.author.id,
+                guildId: message.guild.id,
+                count: 1
+            });
+        } else {
+            const x = userTickets.get('count')
+            if(x == 3) return message.channel.send(" :x: | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
+            userTickets.updateOne({
+                count: x + 1
+            })
+        }
 
         if(!ticket || !logs) return message.delete().then(message.channel.send(" :x: | Ticketing not setup for this server!"))
         if(args[1] == 'create') {

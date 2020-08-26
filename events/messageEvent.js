@@ -60,6 +60,17 @@ module.exports = async (client, message) => {
     // const gConf = await GuildConfig.findOne({ guildId: message.guild.id });
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
     const verify = await guildConfig.get('verify');
+    const ticket = await guildConfig.get('ticket_channel');
+    if(!ticket) {
+
+    }
+    else {
+        const ch = message.guild.channels.cache.find(ch => ch.id == verify);
+        if(message.channel.id == verify) {
+            if(message.author.id == client.user.id) return;
+            message.delete();
+        }
+    }
     if(!verify) {
 
     }
