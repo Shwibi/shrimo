@@ -77,6 +77,7 @@ module.exports = {
                             m.react('🎯');
                         }
                     );
+                    ch.send(`<@${message.author.id}> Support will be right with you!`)
                 }
             );
 
@@ -91,9 +92,7 @@ module.exports = {
                 if(message.channel.name.includes('ticket-')) {
                     message.channel.delete().then(
                         message.member.send(":white_check_mark: | Successfully closed ticket.")
-                    ).then(
-                        logChannel.send(`:white_check_mark: | Closed ticket <#${message.channel.id}>`)
-                    );
+                    )
                 } else {
                     message.channel.send(":x: | You are not in a ticket channel!");
                 }
@@ -114,7 +113,7 @@ module.exports = {
             await closeTicket.updateOne({
                 count: newTicketCount
             }).then(
-                message.channel.send(" :white_check_mark: | Succesfully closed a ticket from database!")
+                message.channel.send(" :white_check_mark: | Succesfully closed a ticket from database! User Ticket Count: " + newTicketCount)
             )
 
         }

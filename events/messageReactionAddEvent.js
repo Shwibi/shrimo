@@ -16,7 +16,9 @@ module.exports = async (client, reaction) => {
                         } else {
                             ticketChannel.updateOverwrite(user, {
                                 VIEW_CHANNEL: true
-                            })
+                            }).then(
+                                ticketChannel.send(`<@${user.id}> has been assigned to assist you!`)
+                            )
                         }
                         
                     })
