@@ -2,7 +2,10 @@ const { execute } = require("./settingsCommand");
 
 module.exports = {
     name: 'ticket',
-    help: '<prefix>ticket create | <prefix>ticket close #ticket | <prefix>ticket closed @user\nMod Support tickets! Create, close, and remove!',
+    help: '<prefix>ticket create | <prefix>ticket close #ticket | <prefix>ticket closed @user\nMod Support tickets! Create, close, and remove!' + 
+    "<prefix>ticket create: Create a ticket in the mod support channel, max 3 \n" + 
+    "<prefix>ticket close #ticket-channel: To be used by a mod, in the ticket channel, to close the ticket \n" +
+    "<prefix>ticket closed @user: To be used to remove a ticket from user database, so that user can now create another ticket.",
     async execute(message, client) {
 
         const args = message.content.toLowerCase().split(" ");
