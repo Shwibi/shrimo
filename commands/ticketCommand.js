@@ -12,30 +12,36 @@ module.exports = {
         const logs = await guildConfig.get('ticket_logs');
         const Tickets = require('../models/Tickets');
         const userTickets = await Tickets.findOne({ userId: message.author.id, guildId: message.guild.id })
-        if(!userTickets) {
-            const userTicket = await Tickets.create({
-                userTag: message.author.tag,
-                userId: message.author.id,
-                guildId: message.guild.id,
-                count: 1
-            });
-        } else {
-            const x = userTickets.get('count')
-            if(x == 3) return message.channel.send(" :x: | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
-            userTickets.updateOne({
-                count: x + 1
-            })
-        }
+        let x = userTickets.get('count');
+        
 
         if(!ticket || !logs) return message.delete().then(message.channel.send(" :x: | Ticketing not setup for this server!"))
         if(args[1] == 'create') {
+            if(!userTickets) {
+                const userTicket = await Tickets.create({
+                    userTag: message.author.tag,
+                    userId: message.author.id,
+                    guildId: message.guild.id,
+                    count: 1
+                });
+            } else {
+                
+                console.log(x);
+                const newCount = x + 1;
+                console.log(newCount);
+                if(x == 3) return message.channel.send(" :x: | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
+                x++;
+                await userTickets.updateOne({
+                    count: newCount
+                })
+            }
             if(message.channel.id != ticket) return message.delete().then(message.channel.send(':x: | Please use the ticket channel for opening tickets.'))
 
             message.delete();
 
             const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);
 
-            message.guild.channels.create(`ticket-${message.author.username}`, {
+            message.guild.channels.create(`ticket-${message.author.username}-${x}`, {
                 type: 'text',
                 permissionOverwrites: [
                     {
@@ -92,6 +98,23 @@ module.exports = {
             } else {
                 message.channel.send(":x: | Channels dont match!");
             }
+        }
+
+        else if(args[1] == 'closed') {
+            if(!message.member.hasPermission("KICK_MEMBERS")) return;
+            let user = message.mentions.users.first();
+            
+            const closeTicket = await Tickets.findOne({ userId: user.id, guildId: message.guild.id});
+            if(!closeTicket) return message.channel.send(" :x: | User tickets not found!");
+            let userTicketCount = await closeTicket.get('count');
+            let newTicketCount = userTicketCount - 1;
+            if(newTicketCount == -1) return message.channel.send(" :x: | User has no tickets!");
+            await closeTicket.updateOne({
+                count: newTicketCount
+            }).then(
+                message.channel.send(" :white_check_mark: | Succesfully closed a ticket from database!")
+            )
+
         }
 
     }

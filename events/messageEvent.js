@@ -65,8 +65,8 @@ module.exports = async (client, message) => {
 
     }
     else {
-        const ch = message.guild.channels.cache.find(ch => ch.id == verify);
-        if(message.channel.id == verify) {
+        const ch = message.guild.channels.cache.find(ch => ch.id == ticket);
+        if(message.channel.id == ticket) {
             if(message.author.id == client.user.id) return;
             message.delete();
         }
