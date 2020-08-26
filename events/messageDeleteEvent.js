@@ -9,6 +9,7 @@ module.exports = async (client, message) => {
     if(!logs) return;
     const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);
     const d = new Date();
+    if(!message.content) return;
 
     const embed = {
         author: {
