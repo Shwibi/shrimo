@@ -15,7 +15,12 @@ module.exports = {
         const logs = await guildConfig.get('ticket_logs');
         const Tickets = require('../models/Tickets');
         const userTickets = await Tickets.findOne({ userId: message.author.id, guildId: message.guild.id })
-        let x = userTickets.get('count');
+        if(!userTickets) {
+
+        }
+        else {
+            let x = userTickets.get('count');
+        }
         
 
         if(!ticket || !logs) return message.delete().then(message.channel.send(" :x: | Ticketing not setup for this server!"))
