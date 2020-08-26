@@ -134,10 +134,18 @@ module.exports = {
             const guildChannel = message.guild.channels.cache.find(ch => ch.id == channel);
             if(!guildChannel) return message.channel.send(":x: | Please mention the channel to close (this channel)");
             if(guildChannel.id == message.channel.id) {
+                
                 if(message.channel.name.includes('ticket-')) {
-                    message.channel.delete().then(
-                        message.member.send(":white_check_mark: | Successfully closed ticket.")
+                    const chID = message.channel.id;
+                    logChannel.send(`Closing ticket <#${chID}>`).then(
+                        m => {
+                            message.channel.delete().then(
+                                message.member.send(":white_check_mark: | Successfully closed ticket.")
+                            ).then(m.edit(`:white_check_mark: | Successfully closed <#${chID}>`))
+                        }
                     )
+                    
+                    
                 } else {
                     message.channel.send(":x: | You are not in a ticket channel!");
                 }
