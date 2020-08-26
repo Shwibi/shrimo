@@ -91,6 +91,8 @@ module.exports = {
                 if(message.channel.name.includes('ticket-')) {
                     message.channel.delete().then(
                         message.member.send(":white_check_mark: | Successfully closed ticket.")
+                    ).then(
+                        logChannel.send(`:white_check_mark: | Closed ticket <#${message.channel.id}>`)
                     );
                 } else {
                     message.channel.send(":x: | You are not in a ticket channel!");
