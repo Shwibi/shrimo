@@ -274,9 +274,9 @@ module.exports = {
                 return;
             }
             const newSet = set.substr(3, 18);
-            console.log(newSet);
+            // console.log(newSet);
             const search = message.guild.roles.cache.find(r => r.id == newSet);
-            console.log(search.name);
+            // console.log(search.name);
             const clientM = message.guild.members.cache.me;
             // if(clientM.roles.highest.calculatedPosition <= search.calculatedPosition) {
             //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");

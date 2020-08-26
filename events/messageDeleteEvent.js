@@ -3,9 +3,9 @@ const GuildConfig = require('../models/GuildConfig');
 module.exports = async (client, message) => {
 
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
-    console.log(guildConfig);
+    // console.log(guildConfig);
     let logs = await guildConfig.get('logs');
-    console.log(logs);
+    // console.log(logs);
     if(!logs) return;
     const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);
     const d = new Date();

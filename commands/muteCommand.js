@@ -13,7 +13,7 @@ module.exports = {
         const GuildConfig = require('../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
         const muteRole = await guildConfig.get('muted');
-        console.log(muteRole);
+        // console.log(muteRole);
         setTimeout(() => {
             if(!muteRole) {
                 message.guild.roles.create(
@@ -25,7 +25,7 @@ module.exports = {
                     }
                 ).then(
                     async m => {
-                        console.log(m.id);
+                        // console.log(m.id);
                         await guildConfig.updateOne(
                             {
                                 muted: m.id

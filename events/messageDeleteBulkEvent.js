@@ -2,7 +2,7 @@ module.exports = async (client, messages) => {
     // console.log(messages);
     const GuildConfig = require('../models/GuildConfig');
     let reply = [];
-    console.log(messages.size);
+    // console.log(messages.size);
     let x = 0;
     messages.forEach(async message => {
         
@@ -14,9 +14,9 @@ module.exports = async (client, messages) => {
         //     `__===========Message deleted===========__`
         // );
         reply.push(message.content);
-        console.log(reply);
+        // console.log(reply);
         const mes = reply.join("\n");
-        console.log(mes);
+        // console.log(mes);
         var guild = message.guild;
         const guildConfig = await GuildConfig.findOne({ guildId: guild.id });
         const logs = guildConfig.get('logs');

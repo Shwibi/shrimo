@@ -73,7 +73,7 @@ module.exports = {
                 x = await userTickets.get('count');
                 // console.log(x);
                 const newCount = x + 1;
-                console.log(newCount);
+                // console.log(newCount);
                 if(x == 3) return message.channel.send(" :x: | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
                 x++;
                 await userTickets.updateOne({
