@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const GuildConfigSchema = new mongoose.Schema({
+    guildName: {
+        type: String,
+        required: false
+    },
     guildId: {
         type: String,
         required: true,

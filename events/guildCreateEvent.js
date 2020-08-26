@@ -6,7 +6,8 @@ module.exports = async (client, guild) => {
 
     try {
         const guildConfig = await GuildConfig.create({
-            guildId: guild.id
+            guildId: guild.id,
+            guildName: guild.name
         })
     } catch (err) {
         console.log(err);
