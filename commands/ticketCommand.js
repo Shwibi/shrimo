@@ -2,7 +2,7 @@ const { execute } = require("./settingsCommand");
 
 module.exports = {
     name: 'ticket',
-    help: '<prefix>ticket create | <prefix>ticket close #ticket \nMod Support tickets!',
+    help: '<prefix>ticket create | <prefix>ticket close #ticket | <prefix>ticket closed @user\nMod Support tickets! Create, close, and remove!',
     async execute(message, client) {
 
         const args = message.content.toLowerCase().split(" ");
