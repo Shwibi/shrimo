@@ -4,7 +4,10 @@
 
 The bot is a multi purpose fun and mod actions bot, with features such as ticketing, custom prefix, welcome and age verification system, muting, and more!
 This is the future!
+<br>
 [Support Server](https://discord.gg/FtJ3QGc)
+<br>
+[Invite Bot to your Guild](https://discord.com/oauth2/authorize?client_id=746202084147331092&scope=bot&permissions=8)
 
 ---
 ### Note
