@@ -5,16 +5,6 @@ const fs = require('fs');
 client.login(process.env.TOKEN);
 const mongoose = require('mongoose');
 
-
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://shwi:IwasbB4nw&21@cluster0.l2gro.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority";
-// const c = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-// c.connect(err => {
-//   const collection = c.db("test").collection("devices");
-//   // perform actions on the collection object
-//   c.close();
-// }); ShwiConfigs
-
 const URL = process.env.URL;
 mongoose.connect(URL, { 
     useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
