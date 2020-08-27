@@ -8,12 +8,21 @@ module.exports = {
         const authorRolePosition = message.member.roles.highest.calculatedPosition;
         const mutee = message.mentions.users.first();
         const muteP = message.guild.members.cache.find(m => m.id == mutee.id);
-        if(!mutee) return message.channel.send("Please mention a user to mute.");
+        if(!mutee) return message.channel.send(":x: | Please mention a user to mute.");
 
         const GuildConfig = require('../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
         const muteRole = await guildConfig.get('muted');
         // console.log(muteRole);
+        if(muteP == message.member ) {
+            message.channel.send(":x: | You cannot mute yourself!");
+            return;
+        }
+        console.log(muteP.roles.highest);
+        if(muteP.roles.highest.rawPosition >= message.member.roles.highest.rawPosition) {
+            message.channel.send(" :x: | You cannot mute a user with same/higher role than you!")
+            return;
+        } 
         setTimeout(() => {
             if(!muteRole) {
                 message.guild.roles.create(
@@ -41,6 +50,7 @@ module.exports = {
                                 ADD_REACTIONS: false
                             })
                         })
+                        message.channel.send(" :white_check_mark: | Muted " + muteP.user.username)
                     }
                 )
     
@@ -50,11 +60,15 @@ module.exports = {
                 
                 const mutedRole = message.guild.roles.cache.find(r => r.id == muteRole);
                 if(!mutedRole) {
-                    message.channel.send("Mute role outdated!");
+                    message.channel.send(":x: | Mute role outdated!");
                     return
                 };
-                muteP.roles.add(mutedRole);
+                muteP.roles.add(mutedRole).then(
+                    muteP.send(`You have been muted in the server **${message.guild.name}**`)
+                ).then(
+                    message.channel.send(":white_check_mark: | Muted " + muteP.user.username)
+                );
             }
-        }, 5000);
+        }, 1000);
     }
 }

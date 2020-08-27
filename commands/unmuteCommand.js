@@ -4,6 +4,7 @@ module.exports = {
     name: 'unmute',
     help: "<prefix>unmute @user \nUnmute a user",
     async execute(message, client) {
+        if(!message.member.hasPermissions('KICK_MEMBERS')) return;
 
         const GuildConfig = require('../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
@@ -13,12 +14,18 @@ module.exports = {
             return message.channel.send("What? no. WHAT? O..kay then. No muted role found.");
         }
         const member = message.mentions.users.first();
+        // console.log(member);
+        const guildMember = message.guild.members.cache.find(m => m.id == member.id);
         if(!member) return message.channel.send("Please mention a user to unmute!");
-        if(member.roles.cache.has(muteRole)) {
-            member.roles.remove(muteRole).then(
-                message.channel.send(" :white_check_mark: | ")
+        if(guildMember.roles.cache.has(muteRole.id)) {
+            guildMember.roles.remove(muteRole).then(
+                message.channel.send(" :white_check_mark: | Successfully unmuted " + guildMember.user.username)
             )
+        } else {
+            message.channel.send(" :x: | User is already unmuted!")
         }
+            
+        
 
     }
 }
