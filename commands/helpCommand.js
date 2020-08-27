@@ -36,7 +36,7 @@ module.exports = {
                     },
                     {
                         name: ":wrench: Mod",
-                        value: 'dm, send, mute, \nunmute, ticket closed, purge',
+                        value: 'dm, send, mute, \nunmute, ticket closed, \npurge',
                         inline: true
                     },
                     {
