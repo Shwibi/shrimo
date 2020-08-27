@@ -12,7 +12,7 @@ This is the future!
 ---
 ### Note
 
-This is a solo project, I am the only one owning this project and am solely responsible for anything and everything my bot does, as I have not shared any token in public. If the bot malfunctions, or anything else regarding the bot, I take full responsibility of it.
+This is a solo project, I am the only one owning this project.
 KeylAmi, the owner&admin of the Official TKOR server helped me with the ticketing system, so all the credit for the ticket goes to him, not me. 
 
 ### Privacy
