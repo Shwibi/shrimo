@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 //   c.close();
 // }); ShwiConfigs
 
-const URL = 'mongodb+srv://shwi:shwishwi@cluster0.2q4wh.gcp.mongodb.net/ShwiConfigs?retryWrites=true&w=majority'
+const URL = process.env.URL;
 mongoose.connect(URL, { 
     useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
 }
