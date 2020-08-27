@@ -21,13 +21,16 @@ No user information except checking for users in a guild using their public user
 ## Features and usage
 1. Suggestion-
     You can suggest antyhing using `<prefix>suggest suggestion goes here` 
-    (using your prefix instead of <prefix>) and it will be logged! Thanks for suggesting!
+    (using your prefix instead of `<prefix>`) and it will be logged! Thanks for suggesting!
+    <br/>
 2. Ticketing-
     Open tickets using `<prefix>ticket create` in ticket channel, close tickets using `<prefix>ticket close #channel-name` in ticket channel, 
     and remove ticket count using `<prefix>ticket closed @user` and check tickets open using `<prefix>tickets @user`
     
 THERE ARE MORE FEATURES, BUT THESE ARE THE ONES WHICH ARE THE MOST IMPORTANT ONES, AND NEED TO BE NOTED HERE.
+<br/>
 More features include:
+<br/>
   Hug, eat, throw, boop, 8ball, mute, unmute, settings, dm, message logging, modmail, and more adding every day!
   
   ---
