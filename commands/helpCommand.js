@@ -31,17 +31,13 @@ module.exports = {
                     },
                     {
                         name: ":brain: Core",
-                        value: 'birthday, help, settings, \nslow, suggest, invite, \nsuggestion, ticket',
+                        value: 'birthday, help, settings, \nslow, suggest, invite, \nsuggestion, ticket, tickets',
                         inline: true
                     },
                     {
                         name: ":wrench: Mod",
                         value: 'dm, send, mute, \nunmute, ticket closed, purge',
                         inline: true
-                    },
-                    {
-                        name: '\u200b',
-                        value: '\u200b'
                     },
                     {
                         name: `Invite Link!`,
