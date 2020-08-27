@@ -4,7 +4,7 @@ module.exports = {
     name: 'ticket',
     help: '<prefix>ticket create | <prefix>ticket close #ticket | <prefix>ticket closed @user\nMod Support tickets! Create, close, and remove!' + 
     "<prefix>ticket create: Create a ticket in the mod support channel, max 3 \n" + 
-    "<prefix>ticket close #ticket-channel: To be used by a mod, in the ticket channel, to close the ticket \n" +
+    "<prefix>ticket close #ticket-channel @user: To be used by a mod, in the ticket channel, to close the ticket \n" +
     "<prefix>ticket closed @user: To be used to remove a ticket from user database, so that user can now create another ticket.",
     async execute(message, client) {
 
@@ -58,6 +58,10 @@ module.exports = {
                                 {
                                     name: 'Ticket',
                                     value: `<#${ch.id}>`
+                                },
+                                {
+                                    name: 'User',
+                                    value: `<@${message.author.id}>`
                                 }
                             ]
                         };
@@ -133,6 +137,8 @@ module.exports = {
             const channel = args[2].substr(2, 18);
             const guildChannel = message.guild.channels.cache.find(ch => ch.id == channel);
             if(!guildChannel) return message.channel.send(":x: | Please mention the channel to close (this channel)");
+            const user = message.mentions.users.first();
+            if(!user) return message.channel.send(":x: | Please mention the user in this ticket to successfully close the ticket!");
             if(guildChannel.id == message.channel.id) {
                 
                 if(message.channel.name.includes('ticket-')) {
@@ -144,6 +150,16 @@ module.exports = {
                                 message.member.send(":white_check_mark: | Successfully closed ticket.")
                             ).then(m.edit(`:white_check_mark: | Successfully closed <#${chID}> [#${chName}]`))
                         }
+                    )
+                    const closeTicket = await Tickets.findOne({ userId: user.id, guildId: message.guild.id});
+                    if(!closeTicket) return message.channel.send(" :x: | User tickets not found!");
+                    let userTicketCount = await closeTicket.get('count');
+                    let newTicketCount = userTicketCount - 1;
+                    if(newTicketCount == -1) return message.channel.send(" :x: | User has no tickets!");
+                    await closeTicket.updateOne({
+                        count: newTicketCount
+                    }).then(
+                        logChannel.send(" :white_check_mark: | Succesfully closed a ticket from database! User Ticket Count: " + newTicketCount)
                     )
                     
                     

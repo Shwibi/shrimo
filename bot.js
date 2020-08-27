@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION', 'CHANNEL']});
 const fs = require('fs');
 client.login(process.env.TOKEN);
 const mongoose = require('mongoose');
