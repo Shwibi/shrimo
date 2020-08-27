@@ -26,7 +26,7 @@ module.exports = {
                 fields: [
                     {
                         name: ":balloon: Fun commands",
-                        value: 'eat, hug, throw, 8ball',
+                        value: 'eat, hug, throw, 8ball, \nboop',
                         inline: true
                     },
                     {
