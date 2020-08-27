@@ -75,18 +75,16 @@ module.exports = {
                 const newCount = x + 1;
                 // console.log(newCount);
                 if(x == 3) return message.channel.send(" :x: | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
-                x++;
+                x = x + 1;
                 await userTickets.updateOne({
                     count: newCount
                 })
-            }
-            x = await userTickets.get('count');
             if(message.channel.id != ticket) return message.delete().then(message.channel.send(':x: | Please use the ticket channel for opening tickets.').then(m => m.delete({ timeout: 5000 })))
 
             message.delete();
 
 
-            message.guild.channels.create(`ticket-${message.author.username}-${x}`, {
+            message.guild.channels.create(`ticket-${message.author.username}-${newCount}`, {
                 type: 'text',
                 permissionOverwrites: [
                     {
@@ -125,6 +123,8 @@ module.exports = {
                     ch.send(`<@${message.author.id}> Support will be right with you!`)
                 }
             );
+            }
+            
 
 
         }
