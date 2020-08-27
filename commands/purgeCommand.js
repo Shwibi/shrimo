@@ -9,8 +9,10 @@ module.exports = {
         const args = message.content.split(" ");
         if(!args[1]) return message.channel.send(" :x: | Please mention amount of messages to purge.");
         if(!isNaN(args[1]) && args[1] <= 100 && args[1] > 2) {
+            const number = parseInt(args[1]) + 1;
+            // console.log(number);
             message.channel.messages.fetch().then(
-                message.channel.bulkDelete(args[1] + 1).then(
+                message.channel.bulkDelete(number).then(
                     message.channel.send(" :white_check_mark: | Successfully deleted " + args[1] + " messages.").then(
                         m => m.delete({ timeout: 5000 })
                     )
