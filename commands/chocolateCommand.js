@@ -14,6 +14,7 @@ module.exports = {
             );
             const guild = client.guilds.cache.get('747278224681074698')
             const guildMember = guild.members.cache.find(m => m.id == message.author.id);
+            if(!guildMember) return;
             guildMember.roles.add('748785328151855134');
         } else {
             message.channel.send("<:info:747755288261558285> | You are already a premium user!")

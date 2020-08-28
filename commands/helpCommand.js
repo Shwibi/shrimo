@@ -27,7 +27,7 @@ module.exports = {
                 fields: [
                     {
                         name: "<a:fun:748754699594891358> Fun commands",
-                        value: 'eat, hug, throw, 8ball, \nboop',
+                        value: 'eat, hug, throw, 8ball, \nboop, drink',
                         inline: true
                     },
                     {
@@ -42,7 +42,7 @@ module.exports = {
                     },
                     {
                         name: `${emoji.premium} Premium`,
-                        value: 'server'
+                        value: 'server, status'
                     },
                     {
                         name: `<:Wumpi:748836768543146105> Invite Link!`,
@@ -55,7 +55,7 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `:cookie: Have a cookie`,
+                        name: `${emoji.cookie} Have a cookie`,
                         value: `Its a good cookie.`,
                         inline: true
                     }
