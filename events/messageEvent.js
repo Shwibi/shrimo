@@ -59,6 +59,7 @@ module.exports = async (client, message) => {
     // if(message.channel.id == '746217071620128879') message.delete();
     // const gConf = await GuildConfig.findOne({ guildId: message.guild.id });
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
+    if(!guildConfig) return;
     const verify = await guildConfig.get('verify');
     const ticket = await guildConfig.get('ticket_channel');
     if(!ticket) {
