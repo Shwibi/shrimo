@@ -40,12 +40,12 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `<:Wumpi:748752389959450654> Invite Link!`,
+                        name: `<:Wumpi:748836768543146105> Invite Link!`,
                         value: '[»» Invite ««](http://discord.com/oauth2/authorize?client_id=746202084147331092&scope=bot&permissions=8)',
                         inline: true
                     },
                     {
-                        name: `<:Wumpi:748752389959450654> Support server`,
+                        name: `<:Wumpi:748836768543146105> Support server`,
                         value: '[»» Join ««](https://discord.gg/FtJ3QGc)',
                         inline: true
                     }
