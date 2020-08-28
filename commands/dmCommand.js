@@ -4,21 +4,21 @@ module.exports = {
     execute(message, client) {
         message.delete();
         if(!message.member.hasPermission('ADMINISTRATOR')) {
-            message.channel.send("No.");
+            message.channel.send("<a:no:748782299667234966> | No.");
             return;
         }
         const user = message.mentions.users.first();
         if(!user) {
-            message.channel.send('Mention a user to dm, please, thank.');
+            message.channel.send('<a:no:748782299667234966> | Mention a user to dm, please, thank.');
             return;
         }
         if(user.id == message.member.id) {
-            message.channel.send("Why do you wanna dm yourself? Just think what you wanna think to yourself! Smh");
+            message.channel.send("<a:no:748782299667234966> | Why do you wanna dm yourself? Just think what you wanna think to yourself! Smh");
             return;
         }
         const search = message.guild.members.cache.find(u => u.id == user.id);
         if(!search) {
-            message.channel.send("That user doesn't even exist in this server! LOL");
+            message.channel.send("<a:no:748782299667234966> | That user doesn't even exist in this server! LOL");
             return;
         }
         const args = message.content.split(" ");

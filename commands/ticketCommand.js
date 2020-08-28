@@ -20,7 +20,7 @@ module.exports = {
         
         let x;
 
-        if(!ticket || !logs) return message.delete().then(message.channel.send(" :x: | Ticketing not setup for this server!"))
+        if(!ticket || !logs) return message.delete().then(message.channel.send(" <a:no:748782299667234966> | Ticketing not setup for this server!"))
         if(args[1] == 'create') {
             if(!userTickets) {
                 const userTicket = await Tickets.create({
@@ -78,12 +78,12 @@ module.exports = {
                 // console.log(x);
                 const newCount = x + 1;
                 // console.log(newCount);
-                if(x == 3) return message.channel.send(" :x: | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
+                if(x == 3) return message.channel.send(" <a:no:748782299667234966> | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
                 x = x + 1;
                 await userTickets.updateOne({
                     count: newCount
                 })
-            if(message.channel.id != ticket) return message.delete().then(message.channel.send(':x: | Please use the ticket channel for opening tickets.').then(m => m.delete({ timeout: 5000 })))
+            if(message.channel.id != ticket) return message.delete().then(message.channel.send('<a:no:748782299667234966> | Please use the ticket channel for opening tickets.').then(m => m.delete({ timeout: 5000 })))
 
             message.delete();
 
@@ -136,9 +136,9 @@ module.exports = {
             if(!message.member.hasPermission("KICK_MEMBERS")) return;
             const channel = args[2].substr(2, 18);
             const guildChannel = message.guild.channels.cache.find(ch => ch.id == channel);
-            if(!guildChannel) return message.channel.send(":x: | Please mention the channel to close (this channel)");
+            if(!guildChannel) return message.channel.send("<a:no:748782299667234966> | Please mention the channel to close (this channel)");
             const user = message.mentions.users.first();
-            if(!user) return message.channel.send(":x: | Please mention the user in this ticket to successfully close the ticket!");
+            if(!user) return message.channel.send("<a:no:748782299667234966> | Please mention the user in this ticket to successfully close the ticket!");
             if(guildChannel.id == message.channel.id) {
                 
                 if(message.channel.name.includes('ticket-')) {
@@ -152,10 +152,10 @@ module.exports = {
                         }
                     )
                     const closeTicket = await Tickets.findOne({ userId: user.id, guildId: message.guild.id});
-                    if(!closeTicket) return message.channel.send(" :x: | User tickets not found!");
+                    if(!closeTicket) return message.channel.send(" <a:no:748782299667234966> | User tickets not found!");
                     let userTicketCount = await closeTicket.get('count');
                     let newTicketCount = userTicketCount - 1;
-                    if(newTicketCount == -1) return message.channel.send(" :x: | User has no tickets!");
+                    if(newTicketCount == -1) return message.channel.send(" <a:no:748782299667234966> | User has no tickets!");
                     await closeTicket.updateOne({
                         count: newTicketCount
                     }).then(
@@ -164,10 +164,10 @@ module.exports = {
                     
                     
                 } else {
-                    message.channel.send(":x: | You are not in a ticket channel!");
+                    message.channel.send("<a:no:748782299667234966> | You are not in a ticket channel!");
                 }
             } else {
-                message.channel.send(":x: | Channels dont match!");
+                message.channel.send("<a:no:748782299667234966> | Channels dont match!");
             }
         }
 
@@ -176,10 +176,10 @@ module.exports = {
             let user = message.mentions.users.first();
             
             const closeTicket = await Tickets.findOne({ userId: user.id, guildId: message.guild.id});
-            if(!closeTicket) return message.channel.send(" :x: | User tickets not found!");
+            if(!closeTicket) return message.channel.send(" <a:no:748782299667234966> | User tickets not found!");
             let userTicketCount = await closeTicket.get('count');
             let newTicketCount = userTicketCount - 1;
-            if(newTicketCount == -1) return message.channel.send(" :x: | User has no tickets!");
+            if(newTicketCount == -1) return message.channel.send(" <a:no:748782299667234966> | User has no tickets!");
             await closeTicket.updateOne({
                 count: newTicketCount
             }).then(
@@ -188,7 +188,7 @@ module.exports = {
 
         }
         else {
-            return message.channel.send(" :x: | Could not rexognise that command, please use create/close/closed").then(m => m.delete({ timeout: 5000 }));
+            return message.channel.send(" <a:no:748782299667234966> | Could not rexognise that command, please use create/close/closed").then(m => m.delete({ timeout: 5000 }));
         }
 
     }

@@ -6,7 +6,7 @@ module.exports = {
         const args = message.content.split(" ");
         let time = args[1];
         if(isNaN(time)) {
-            message.channel.send("Please use a number for a slowmo!");
+            message.channel.send("<a:no:748782299667234966> | Please use a number for a slowmo!");
             return;
         }
         message.channel.setRateLimitPerUser(time).then(

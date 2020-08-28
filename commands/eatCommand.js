@@ -5,11 +5,11 @@ module.exports = {
     execute(message, client) {
         const user = message.mentions.users.first();
         if(!user) {
-            message.channel.send('Mention someone, mate, ok? ok. Good.');
+            message.channel.send('<a:no:748782299667234966> | Mention someone, mate, ok? ok. Good.');
             return;
         }
         if(user.id === message.author.id) {
-            message.channel.send("Why.. just like, why do you wanna eat yourself? Are you ok?");
+            message.channel.send("<a:no:748782299667234966> | Why.. just like, why do you wanna eat yourself? Are you ok?");
             return;
         }
         const member = message.guild.members.cache.find(u => u == user.id);

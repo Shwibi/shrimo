@@ -7,7 +7,7 @@ module.exports = {
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
 
         const verify = await guildConfig.get('verify');
-        if(!verify) return message.reply("No verification system setup for this server.");
+        if(!verify) return message.reply("<a:no:748782299667234966> | No verification system setup for this server.");
 
         // const verifyChannel = message.guild.channels.cache.find(ch => ch.id == verify);
         if(message.channel.id != verify) return;
@@ -18,7 +18,7 @@ module.exports = {
         const underageRole = message.guild.roles.cache.find(r => r.id == underage);
 
         if(!member || !underage) {
-            return message.reply("No verify roles found");
+            return message.reply("<a:no:748782299667234966> | No verify roles found");
         }
 
         if(message.member.roles.cache.has(member) || message.member.roles.cache.has(underage)) return console.log('No');

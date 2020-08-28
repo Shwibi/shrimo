@@ -4,7 +4,7 @@ module.exports = {
     async execute(message, client) {
         const Suggestions = require('../models/Suggestions');
         const args = message.content.split(" ");
-        if(!args[1]) return message.channel.send("We appreciate your thought, but please add a suggestion to suggest something or 'get' to get a suggestion you suggested before :sweat_smile:");
+        if(!args[1]) return message.channel.send("<a:no:748782299667234966> | We appreciate your thought, but please add a suggestion to suggest something or 'get' to get a suggestion you suggested before :sweat_smile:");
         const suggestion = args.slice(1).join(" ");
         const suggest = await Suggestions.create({
             userTag: message.author.tag,
@@ -17,11 +17,11 @@ module.exports = {
         setTimeout(async () => {
             const userSuggestion = await Suggestions.findOne({ messageId: message.id });
             if(!userSuggestion) {
-                return message.channel.send(" :x: | Could not fetch suggestion id!");
+                return message.channel.send(" <a:no:748782299667234966> | Could not fetch suggestion id!");
             }
             const id = userSuggestion.get('messageId');
             if(!id) {
-                return message.channel.send(" :x: | Could not fetch suggestion id!");
+                return message.channel.send(" <a:no:748782299667234966> | Could not fetch suggestion id!");
             }
             message.member.send("Here's your app id: " + id + `\n **For:** \n ${suggestion}`);
         }, 3000)

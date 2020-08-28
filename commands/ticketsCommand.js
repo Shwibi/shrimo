@@ -7,7 +7,7 @@ module.exports = {
         if(!message.member.hasPermission('ADMINISTRATORS')) return;
         const user = message.mentions.users.first();
         if(!user) {
-            message.channel.send("Please mention a user whose tickets you want to see.");
+            message.channel.send("<a:no:748782299667234966> | Please mention a user whose tickets you want to see.");
             return;
         }
         const guildUser = message.guild.members.cache.find(m => m.id == user.id);

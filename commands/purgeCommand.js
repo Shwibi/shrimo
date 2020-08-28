@@ -7,7 +7,7 @@ module.exports = {
     async execute(message, client) {
         if(!message.member.hasPermission("MANAGE_MESSAGES")) return;
         const args = message.content.split(" ");
-        if(!args[1]) return message.channel.send(" :x: | Please mention amount of messages to purge.");
+        if(!args[1]) return message.channel.send(" <a:no:748782299667234966> | Please mention amount of messages to purge.");
         if(!isNaN(args[1]) && args[1] <= 100 && args[1] >= 2) {
             const number = parseInt(args[1]) + 1;
             // console.log(number);
@@ -19,7 +19,7 @@ module.exports = {
                 )
             )
         } else {
-            message.channel.send(" :x: | Please mention a number between 2-100 to purge! Note that I can't delete messages which were made before 14 days due to discord limitations on deleting messages.");
+            message.channel.send(" <a:no:748782299667234966> | Please mention a number between 2-100 to purge! Note that I can't delete messages which were made before 14 days due to discord limitations on deleting messages.");
 
         }
     }

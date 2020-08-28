@@ -5,13 +5,13 @@ module.exports = {
     execute(message, client) {
         message.delete();
         if(!message.member.hasPermission('ADMINISTRATOR')) {
-            message.channel.send("No permissions! You have no permissions!");
+            message.channel.send("<a:no:748782299667234966> | No permissions! You have no permissions!");
             return;
         }
         const channel = message.mentions.channels.first() || message.content.split(" ")[1].substr(2, 18);
-        if(!channel) return message.channel.send("Mention a channel");
+        if(!channel) return message.channel.send("<a:no:748782299667234966> | Mention a channel");
         const searchChannel = message.guild.channels.cache.find(ch => ch.id == channel.id);
-        if(!searchChannel) return message.channel.send("No channel found in server...");
+        if(!searchChannel) return message.channel.send("<a:no:748782299667234966> | No channel found in server...");
 
         const args = message.content.split(" ");
         const msg = args.slice(2).join(" ");

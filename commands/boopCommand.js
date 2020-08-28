@@ -7,12 +7,12 @@ module.exports = {
     async execute(message, client) {
         const user = message.mentions.users.first();
         if(!user) {
-            message.channel.send(':x: | Please mention a user to booppp! OwO');
+            message.channel.send('<a:no:748782299667234966> | Please mention a user to booppp! OwO');
             return;
         }
         const guildUser = message.guild.members.cache.find(u => u.id == user.id);
         if(!guildUser) {
-            message.channel.send(':x: | User doesnt exist in this sevrer ;-;');
+            message.channel.send('<a:no:748782299667234966> | User doesnt exist in this sevrer ;-;');
             return;
         }
         const name = guildUser.displayName || guildUser.member.displayName || guildUser.user.username || guildUser.username;

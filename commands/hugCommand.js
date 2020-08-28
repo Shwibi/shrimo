@@ -5,7 +5,7 @@ module.exports = {
     execute(message, client) {
         const user = message.mentions.users.first();
         if(!user) {
-            message.channel.send('Mention a user to hug please.');
+            message.channel.send('<a:no:748782299667234966> | Mention a user to hug please.');
             return;
         }
         const member = message.guild.members.cache.find(u => u.id == user.id);

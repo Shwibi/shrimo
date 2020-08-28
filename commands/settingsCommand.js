@@ -109,14 +109,14 @@ module.exports = {
         }
 
         if(!settings.includes(use)) {
-            return message.channel.send("No such settings present.");
+            return message.channel.send("<a:no:748782299667234966> | No such settings present.");
         }
 
         // const setting = guildConfig.get(use);
 
         if(use == 'prefix') {
             if(set == "remove") {
-                message.channel.send("You won't be able to use any bot commands if you remove the prefix... So no.");
+                message.channel.send("<a:no:748782299667234966> | You won't be able to use any bot commands if you remove the prefix... So no.");
                 return;
             }
             // console.log(set)
@@ -138,7 +138,7 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("No such channel found.");
+            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 welcome: newSet
             }).then(
@@ -161,7 +161,7 @@ module.exports = {
             //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
             //     return;
             // }
-            if(!search)  return message.channel.send("No such role found.");
+            if(!search)  return message.channel.send("<a:no:748782299667234966> | No such role found.");
             // const bot = message.guild.me;
             // console.log(bot);
             // let botrole = bot.highestRole;
@@ -188,7 +188,7 @@ module.exports = {
             //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
             //     return;
             // }
-            if(!search)  return message.channel.send("No such role found.");
+            if(!search)  return message.channel.send("<a:no:748782299667234966> | No such role found.");
             // const bot = message.guild.members.cache.find(u => u.id == client.user.id);
             // let botrole = bot.highestRole;
             // if(search.calculatedPosition > botrole.calculatedPosition) return message.channel.send('My role is below the given role, please put my role above the mentioned role.');
@@ -209,7 +209,7 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("No such channel found.");
+            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 logs: newSet
             }).then(
@@ -227,7 +227,7 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("No such channel found.");
+            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 verify: newSet
             }).then(
@@ -282,7 +282,7 @@ module.exports = {
             //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
             //     return;
             // }
-            if(!search)  return message.channel.send("No such role found.");
+            if(!search)  return message.channel.send("<a:no:748782299667234966> | No such role found.");
             // const bot = message.guild.members.cache.find(u => u.id == client.user.id);
             // let botrole = bot.highestRole;
             // if(search.calculatedPosition > botrole.calculatedPosition) return message.channel.send('My role is below the given role, please put my role above the mentioned role.');
@@ -303,7 +303,7 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("No such channel found.");
+            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 ticket_channel: newSet
             }).then(
@@ -323,7 +323,7 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("No such channel found.");
+            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 ticket_logs: newSet
             }).then(

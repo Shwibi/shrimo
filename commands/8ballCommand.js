@@ -9,7 +9,7 @@ module.exports = {
             'Alright.', 'Ask me later', 'In a minute, probably', 'No no no'
         ]
         const question = message.content.split(" ").slice(1).join(" ");
-        if(!question) return message.channel.send("Please ask a question");
+        if(!question) return message.channel.send("<a:no:748782299667234966> | Please ask a question");
         const index = Math.floor(Math.random() * possible.length);
         const embed = {
             author: {
