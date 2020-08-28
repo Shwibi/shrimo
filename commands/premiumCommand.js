@@ -40,6 +40,22 @@ module.exports = {
             const guildMember = guild.members.cache.find(m => m.id == message.author.id);
             if(!guildMember) return;
             guildMember.roles.remove('748785328151855134');
+        } 
+        else if(action == 'list') {
+            message.channel.send(`${emoji.time} Fetching list...`).then(
+                async m => {
+                    const list = [`${emoji.premium} **Premium Users:** `];
+                    const cursor = await PremiumUsers.find().stream();
+                    cursor.on('data', doc => {
+                        console.log(doc.userTag);
+                        list.push(doc.userTag);
+                    })
+                    setTimeout(() => {
+                        m.edit(list.join('\n'))
+                    }, 2000);
+                }
+            )
+            
         }
     }
 }
