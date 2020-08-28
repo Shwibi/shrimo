@@ -58,6 +58,10 @@ module.exports = {
                 }
             )
             
+        } 
+        else {
+            message.channel.send(`${emoji.x} | Could not recognise that command.`);
+            return;
         }
     }
 }
