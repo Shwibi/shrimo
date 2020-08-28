@@ -13,6 +13,7 @@ module.exports = {
             color: 0xfcba03
         };
         message.channel.send({ embed: help });
+        const { emoji } = require('../config/config.json');
 
         setTimeout(() => {
             const em = {
@@ -38,6 +39,10 @@ module.exports = {
                         name: "<:mod:748754150715687022> Mod",
                         value: 'dm, send, mute, \nunmute, ticket closed, \npurge',
                         inline: true
+                    },
+                    {
+                        name: `${emoji.premium} Premium`,
+                        value: 'server'
                     },
                     {
                         name: `<:Wumpi:748836768543146105> Invite Link!`,

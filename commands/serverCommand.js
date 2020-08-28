@@ -17,7 +17,11 @@ module.exports = {
             fields: [
                 {
                     name: "Guild Members",
-                    value: message.guild.members.cache.size 
+                    value: message.guild.members.cache.size
+                },
+                {
+                    name: "Bots",
+                    value: message.guild.members.cache.filter(m => m.user.bot).size
                 },
                 {
                     name: "Guild roles",
