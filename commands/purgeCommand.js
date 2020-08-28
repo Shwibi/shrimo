@@ -8,7 +8,7 @@ module.exports = {
         if(!message.member.hasPermission("MANAGE_MESSAGES")) return;
         const args = message.content.split(" ");
         if(!args[1]) return message.channel.send(" :x: | Please mention amount of messages to purge.");
-        if(!isNaN(args[1]) && args[1] <= 100 && args[1] > 2) {
+        if(!isNaN(args[1]) && args[1] <= 100 && args[1] >= 2) {
             const number = parseInt(args[1]) + 1;
             // console.log(number);
             message.channel.messages.fetch().then(

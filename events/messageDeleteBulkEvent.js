@@ -13,7 +13,13 @@ module.exports = async (client, messages) => {
         //     `**Content:** \n${message.content} \n` + 
         //     `__===========Message deleted===========__`
         // );
-        reply.push(message.content);
+        if(message.author) {
+            reply.push(`**${message.author.tag}:** ${message.content}`);
+        } else {
+            reply.push(`**Unknown:** ${message.content}`);
+        }
+            
+        
         // console.log(reply);
         const mes = reply.join("\n");
         // console.log(mes);

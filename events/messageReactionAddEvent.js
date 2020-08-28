@@ -10,12 +10,12 @@ module.exports = async (client, reaction, user) => {
 		}
     }
     
-    console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`)
+    // console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`)
 
     if(reaction.message.embeds) {
-        console.log('Yes');
+        // console.log('Yes');
         await reaction.message.embeds.forEach(embed => {
-            console.log('yes'); 
+            // console.log('yes'); 
             if(embed.description.includes('<#') && embed.description.includes('>')) {
                 const channel = embed.description.substr(embed.description.indexOf('#'), embed.description.indexOf('>'));
                 // console.log(channel);

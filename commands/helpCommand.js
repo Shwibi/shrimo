@@ -25,28 +25,28 @@ module.exports = {
                 description: "The prefix for this server is `" + prefix + "`",
                 fields: [
                     {
-                        name: ":balloon: Fun commands",
+                        name: "<a:fun:748754699594891358> Fun commands",
                         value: 'eat, hug, throw, 8ball, \nboop',
                         inline: true
                     },
                     {
-                        name: ":brain: Core",
+                        name: "<a:core:748753320885092384> Core",
                         value: 'birthday, help, settings, \nslow, suggest, invite, \nsuggestion, ticket, tickets',
-                        inline: true
+                        inline: true    
                     },
                     {
-                        name: ":wrench: Mod",
+                        name: "<:mod:748754150715687022> Mod",
                         value: 'dm, send, mute, \nunmute, ticket closed, \npurge',
                         inline: true
                     },
                     {
-                        name: `Invite Link!`,
-                        value: '[Invite](http://discord.com/oauth2/authorize?client_id=746202084147331092&scope=bot&permissions=8)',
+                        name: `<:Wumpi:748752389959450654> Invite Link!`,
+                        value: '[»» Invite ««](http://discord.com/oauth2/authorize?client_id=746202084147331092&scope=bot&permissions=8)',
                         inline: true
                     },
                     {
-                        name: `Support server`,
-                        value: '[Join](https://discord.gg/FtJ3QGc)',
+                        name: `<:Wumpi:748752389959450654> Support server`,
+                        value: '[»» Join ««](https://discord.gg/FtJ3QGc)',
                         inline: true
                     }
                 ],
