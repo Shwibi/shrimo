@@ -188,7 +188,7 @@ module.exports = {
 
         }
         else {
-            return message.channel.send(" <a:no:748782299667234966> | Could not rexognise that command, please use create/close/closed").then(m => m.delete({ timeout: 5000 }));
+            return message.channel.send(" <a:no:748782299667234966> | Could not recognise that command, please use create/close/closed").then(m => m.delete({ timeout: 5000 }));
         }
 
     }
