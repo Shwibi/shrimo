@@ -1,6 +1,7 @@
 const messageDeleteEvent = require('./messageDeleteEvent');
 
 module.exports = async (client, oldMessage, newMessage) => {
+    if(!oldMessage.author) return;
     if(!oldMessage.guild) return;
     const GuildConfig = require('../models/GuildConfig');
     const guildConfig = await GuildConfig.findOne({ guildId: oldMessage.guild.id });
