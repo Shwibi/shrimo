@@ -51,7 +51,9 @@ module.exports = {
                         list.push(doc.userTag);
                     })
                     setTimeout(() => {
-                        m.edit(list.join('\n'))
+                        m.edit(`${emoji.done} Here's the premium list!`).then(
+                            message.channel.send(list.join('\n'))
+                        )
                     }, 2000);
                 }
             )
