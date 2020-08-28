@@ -48,6 +48,11 @@ module.exports = {
                         name: `<:Wumpi:748836768543146105> Support server`,
                         value: '[»» Join ««](https://discord.gg/FtJ3QGc)',
                         inline: true
+                    },
+                    {
+                        name: `:cookie: Have a cookie`,
+                        value: `Its a good cookie.`,
+                        inline: true
                     }
                 ],
                 footer: {
