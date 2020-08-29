@@ -46,13 +46,13 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: '\u200b',
-                        value: '\u200b'
-                    },
-                    {
                         name: `${emoji.money} Economy`,
                         value: `buy, shrimos, use, money`,
                         inline: true
+                    },
+                    {
+                        name: '\u200b',
+                        value: '\u200b'
                     },
                     {
                         name: `<:Wumpi:748836768543146105> Invite Link!`,
