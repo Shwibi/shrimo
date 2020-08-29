@@ -37,7 +37,7 @@ module.exports = {
                     },
                     {
                         name: "<:mod:748754150715687022> Mod",
-                        value: 'dm, send, mute, \nunmute, ticket closed, \npurge',
+                        value: 'dm, send, mute, \nunmute, ticket closed, \npurge, dmall',
                         inline: true
                     },
                     {

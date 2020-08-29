@@ -34,6 +34,9 @@ module.exports = {
                     {
                         name: `${emoji.core} Nuke`,
                         value: `500 Shrimos`
+                    },{
+                        name: `:coffee: Coffee`,
+                        value: `20 Shrimos`
                     },
                     {
                         name: `Your items~`,
@@ -95,6 +98,22 @@ module.exports = {
                 })
             ).then(
                 message.channel.send(`${emoji.done} | Successfully purchased A Nuke! ${emoji.core} Use it properly, it can be very devastating!`)
+            )
+        } 
+        else if(args[1] == 'coffee') {
+            if(storage.includes('nuke')) return message.channel.send(`${emoji.x} | You already own a Coffee!`);
+            if(money < 20 && message.author.id != '700328450270953503') return message.channel.send(`${emoji.x} You do not have enough money!`);
+            const newMoney = money - 20;
+            await ecoUser.updateOne({
+                $push : {
+                    storage: "coffee"
+                }
+            }).then(
+                await ecoUser.updateOne({
+                    money: newMoney
+                })
+            ).then(
+                message.channel.send(`${emoji.done} | Successfully purchased Coffee!`)
             )
         }
 

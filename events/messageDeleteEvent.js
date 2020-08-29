@@ -1,7 +1,7 @@
 const GuildConfig = require('../models/GuildConfig');
 
 module.exports = async (client, message) => {
-
+    if(!message.guild) return;
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
     // console.log(guildConfig);
     let logs = await guildConfig.get('logs');
@@ -40,5 +40,16 @@ module.exports = async (client, message) => {
     };
 
     logChannel.send({ embed: embed });
+
+    const ping = await guildConfig.get('ghostPing');
+    if(ping == true) {
+        if(message.mentions.users) {
+            message.mentions.users.forEach(user => {
+                user.send(
+                    `<@${message.author.id}> deleted their message which pinged you in <#${message.channel.id}>, content: \n${message.content}`
+                )
+            })
+        }
+    }
 
 }

@@ -45,6 +45,10 @@ const GuildConfigSchema = new mongoose.Schema({
     ticket_logs: {
         type: String,
         required: false
+    },
+    ghostPing: {
+        type: Boolean,
+        required: false
     }
 })
 

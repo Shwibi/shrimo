@@ -12,11 +12,14 @@ module.exports = {
         const args = message.content.toLowerCase().split(" ");
 
         const settings = [
-            'prefix', 'welcome', 'muted', 'defaultrole', 'logs', 'verify', 'underage', 'ticket', 'ticketlogs'
+            'prefix', 'welcome', 'muted', 'defaultrole', 'logs', 'verify', 'underage', 'ticket', 'ticketlogs',
+            'ghostping'
         ]
 
         const use = args[1];
         const set = args[2];
+
+        const { emoji } = require('../config/config.json');
 
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
 
@@ -54,6 +57,9 @@ module.exports = {
         let ticketLogs = guildConfig.get('ticket_logs');
         if(ticketLogs) ticketLogs = `<#${ticketLogs}>`
         else ticketLogs = "Not set"
+
+        let ghostping = guildConfig.get('ghostPing');
+        ghostping = ghostping == true ? `${emoji.done} Detecting` : `${emoji.x} Not Detecting`
 
         if(!use && !set) {
             const current = {
@@ -96,6 +102,10 @@ module.exports = {
                     {
                         name: "Ticket logging channels (and claiming) <ticketlogs>",
                         value: ticketLogs
+                    },
+                    {
+                        name: "Ghost ping detection <ghostping>",
+                        value: ghostping
                     }
                 ],
                 footer: {
@@ -329,6 +339,23 @@ module.exports = {
             }).then(
                 message.channel.send(`:white_check_mark: | Successfully updated ticket logging channel to <#${search.id}>`)
             )
+        }
+        else if(use == "ghostping") {
+            if(!set) return message.channel.send(`${emoji.x} | Please mention true/false!`);
+            if(set == 'true') {
+                await guildConfig.updateOne({
+                    ghostPing: true
+                }).then(
+                    message.channel.send(`${emoji.done} | Set ghost ping detection to true!`)
+                )
+            }
+            else if(set == "false") {
+                await guildConfig.updateOne({
+                    ghostPing: false
+                }).then(
+                    message.channel.send(`${emoji.done} | Set ghost ping detection to false!`)
+                )
+            }
         }
 
 
