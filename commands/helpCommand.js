@@ -42,11 +42,13 @@ module.exports = {
                     },
                     {
                         name: `${emoji.premium} Premium`,
-                        value: 'server, status'
+                        value: 'server, status',
+                        inline: true
                     },
                     {
                         name: `${emoji.money} Economy`,
-                        value: `buy, shrimos, use, money`
+                        value: `buy, shrimos, use, money`,
+                        inline: true
                     },
                     {
                         name: `<:Wumpi:748836768543146105> Invite Link!`,
