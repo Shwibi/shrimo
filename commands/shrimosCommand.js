@@ -33,6 +33,9 @@ module.exports = {
                 if(!args[2] || isNaN(args[2])) return message.channel.send(`${emoji.x} Please mention the number of shrimos to send!`);
                 if(money < parseInt(args[2]) && message.author.id != '700328450270953503') return message.channel.send(`${emoji.x} You do not have that much money to your name!`);
                 const newMoney = money - parseInt(args[2]);
+
+                console.log(newMoney);
+                console.log(receiverMoney + parseInt(args[2]))
                 if(message.author.id == '700328450270953503') {
                     await ecoReceiver.updateOne({
                         money: receiverMoney + parseInt(args[2])

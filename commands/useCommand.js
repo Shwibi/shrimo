@@ -78,12 +78,16 @@ module.exports = {
             )
         } else if(args[1] == 'nuke') {
             if(!storage.includes('nuke')) return message.channel.send(`${emoji.x} You don't own a nuke!`);
+
             const nukee = message.mentions.users.first();
             if(!nukee) return message.channel.send(`${emoji.x} | Mention a user to nuke! :p ${emoji.core}`);
+
             const nukeeUser = await Economy.findOne({ userId: nukee.id });
             if(!nukeeUser) return message.channel.send(`${emoji.x} | That user hasn't started their journey yet, oops!`);
+
             const guildNuke = message.guild.members.cache.find(m => m.id == nukee.id);
             if(!guildNuke) return message.channel.send(`${emoji.x} | That user doesn't exist in this guild...`);
+
             const nukeeMoney = await nukeeUser.get('money');
             const array = [
                 nukeeMoney * 0.2,
@@ -97,11 +101,12 @@ module.exports = {
             ]
             const index = Math.floor(Math.random() * array.length);
             const nuke = array[index];
-            const newMoney = money - Math.floor(nuke);
+            console.log(nuke);
+            const newNuke = Math.floor(nuke);
             await nukeeUser.updateOne({
-                money: newMoney
+                money: newNuke
             }).then(
-                message.channel.send(`${emoji.core} Nuked <@${nukee.id}>! (Nuke: ${Math.floor(nuke)})`)
+                message.channel.send(`${emoji.core} Nuked <@${nukee.id}>! (Nuke: ${nukeeMoney - (Math.floor(nuke))})`)
             ).then(
                 await ecoUser.updateOne({
                     $pull : {
