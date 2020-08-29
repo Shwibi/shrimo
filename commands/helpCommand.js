@@ -52,7 +52,8 @@ module.exports = {
                     },
                     {
                         name: '\u200b',
-                        value: '\u200b'
+                        value: '\u200b',
+                        inline: true
                     },
                     {
                         name: `<:Wumpi:748836768543146105> Invite Link!`,
