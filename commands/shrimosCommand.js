@@ -60,7 +60,6 @@ module.exports = {
             } else {
                 ecoReceiver = await Economy.findOne({ userId: user.id });
                 const receiverMoney2 = await ecoReceiver.get('money');
-                if(!receiverMoney2) return message.channel.send(`${emoji.x} | Something went wrong with the system, please try again!`);
                 if(!args[2] || isNaN(args[2])) return message.channel.send(`${emoji.x} Please mention the number of shrimos to send!`);
                 if(money < parseInt(args[2]) && message.author.id != '700328450270953503') return message.channel.send(`${emoji.x} You do not have that much money to your name!`);
                 const newMoney = money - parseInt(args[2]);

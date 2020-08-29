@@ -15,7 +15,6 @@ module.exports = {
         const storage = await ecoUser.get('storage');
         if(!storage) return message.channel.send(`${emoji.x} | You do not have any items`);
         const money = await ecoUser.get('money');
-        if(!money) return message.channel.send(`${emoji.x} | Something went wrong with fetching details...`);
         const args = message.content.toLowerCase().split(" ");
         if(!args[1]) return message.channel.send(`${emoji.x} | Please mention an item to use!`);
         if(args[1] == 'premium') {
