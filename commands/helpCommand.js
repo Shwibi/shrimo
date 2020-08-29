@@ -48,7 +48,7 @@ module.exports = {
                     {
                         name: '\u200b',
                         value: '\u200b'
-                    }
+                    },
                     {
                         name: `${emoji.money} Economy`,
                         value: `buy, shrimos, use, money`,
