@@ -45,6 +45,10 @@ module.exports = {
                         value: 'server, status'
                     },
                     {
+                        name: `${emoji.money} Economy`,
+                        value: `buy, shrimos, use, money`
+                    },
+                    {
                         name: `<:Wumpi:748836768543146105> Invite Link!`,
                         value: '[»» Invite ««](http://discord.com/oauth2/authorize?client_id=746202084147331092&scope=bot&permissions=8)',
                         inline: true
