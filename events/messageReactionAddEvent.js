@@ -1,4 +1,5 @@
 module.exports = async (client, reaction, user) => {
+    const { emoji } = require('../config/config.json');
     if (reaction.partial) {
 		// If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
 		try {
@@ -23,7 +24,7 @@ module.exports = async (client, reaction, user) => {
                     // console.log("Claim");
                     const channelId = channel.substr(1, 18);
                     const ticketChannel = reaction.message.guild.channels.cache.find(ch => ch.id == channelId);
-                    if(!ticketChannel) return reaction.message.channel.send("No ticket found...");
+                    if(!ticketChannel) return reaction.message.channel.send(`${emoji.x} | Ticket not found!`);
                     // reaction.users.cache.forEach(usert => {
                     //     if(usert.bot) {
 

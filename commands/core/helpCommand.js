@@ -27,7 +27,7 @@ module.exports = {
                 fields: [
                     {
                         name: "<a:fun:748754699594891358> Fun commands",
-                        value: 'eat, hug, throw, 8ball, \nboop, drink',
+                        value: 'eat, hug, throw, 8ball, \nboop',
                         inline: true
                     },
                     {

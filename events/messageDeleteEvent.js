@@ -1,6 +1,7 @@
 const GuildConfig = require('../models/GuildConfig');
 
 module.exports = async (client, message) => {
+    if(message.partials) message.fetch();
     if(!message.guild) return;
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
     // console.log(guildConfig);
