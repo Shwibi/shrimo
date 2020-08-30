@@ -66,8 +66,8 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `${emoji.cookie} Have a cookie`,
-                        value: `Its a good cookie.`,
+                        name: `${emoji.diamond} Dev Server`,
+                        value: `[»» Join ««](https://discord.gg/fDuhPKq)`,
                         inline: true
                     }
                 ],
