@@ -1,4 +1,5 @@
 const GuildConfig = require('../../models/GuildConfig');
+const PremiumUsers = require('../../models/PremiumUsers');
 
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
 
         const settings = [
             'prefix', 'welcome', 'muted', 'defaultrole', 'logs', 'verify', 'underage', 'ticket', 'ticketlogs',
-            'ghostping'
+            'ghostping', 'maxtickets'
         ]
 
         const use = args[1];
@@ -61,6 +62,10 @@ module.exports = {
         let ghostping = guildConfig.get('ghostPing');
         ghostping = ghostping == true ? `${emoji.done} Detecting` : `${emoji.x} Not Detecting`
 
+        let maxtickets = guildConfig.get('maxTickets');
+        if(maxtickets) maxtickets = maxtickets
+        else maxtickets = `Not set`
+
         if(!use && !set) {
             const current = {
                 title: "Current settings",
@@ -105,7 +110,13 @@ module.exports = {
                     },
                     {
                         name: "Ghost ping detection <ghostping>",
-                        value: ghostping
+                        value: ghostping,
+                        inline: true
+                    },
+                    {
+                        name: `Max tickets ${emoji.premium} PREMIUM`,
+                        value: maxtickets,
+                        inline: true
                     }
                 ],
                 footer: {
@@ -356,6 +367,26 @@ module.exports = {
                     message.channel.send(`${emoji.done} | Set ghost ping detection to false!`)
                 )
             }
+        }
+        else if(use == 'maxtickets') {
+            const premiumUser = await PremiumUsers.findOne({ userId: message.author.id });
+            if(!premiumUser) message.channel.send(`${emoji.x} | You are not a premium user! ${emoji.premium}`);
+
+            if(!set) return message.channel.send(`${emoji.x} | Please mention the max number of tickets to set!`);
+
+            if(isNaN(set)) return message.channel.send(`${emoji.x} | Max tickets has to be a number!`);
+            if(set > 30) return message.channel.send(`${emoji.x} | Max tickets have to be less than 30!`);
+            if(set < 3) return message.channel.send(`${emoji.x} You know ver well why this shouldn't work.`);
+            message.channel.send(`${emoji.time} Setting max tickets to ${set}...`).then(
+                async m => {
+                        await guildConfig.updateOne({
+                            maxTickets: parseInt(set)
+                        }).then(
+                            m.edit(`${emoji.done} | Set Max tickets to ${set}`)
+                        )
+                }
+            )
+            
         }
 
 

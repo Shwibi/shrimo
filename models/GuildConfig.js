@@ -49,6 +49,10 @@ const GuildConfigSchema = new mongoose.Schema({
     ghostPing: {
         type: Boolean,
         required: false
+    },
+    maxTickets: {
+        type: Number,
+        required: false
     }
 })
 

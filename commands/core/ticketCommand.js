@@ -13,7 +13,9 @@ module.exports = {
         const logs = await guildConfig.get('ticket_logs');
         const Tickets = require('../../models/Tickets');
         const userTickets = await Tickets.findOne({ userId: message.author.id, guildId: message.guild.id })
-        
+        const maxtickets = await guildConfig.get('maxTickets');
+
+
         const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);
         
         let x;
@@ -76,7 +78,7 @@ module.exports = {
                 // console.log(x);
                 const newCount = x + 1;
                 // console.log(newCount);
-                if(x == 3) return message.channel.send(" <a:no:748782299667234966> | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
+                if(x == maxtickets) return message.channel.send(" <a:no:748782299667234966> | Maximum tickets reached! ").then(m => m.delete({ timeout: 5000 }));
                 x = x + 1;
                 await userTickets.updateOne({
                     count: newCount
