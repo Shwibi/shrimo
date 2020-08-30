@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
+const { emoji } = require('../../config/config.json');
 
 module.exports = {
     name: 'dmall',
-    help: '<prefix>dmall Message to send \nDM All the users of the guild, owner only command.',
+    help: '<prefix>dmall Message to send \nDM All the users of the guild, owner only command. \n' + `${emoji.premium}**PREMIUM**`,
     async execute(message, client) {
         if(!message.member.hasPermission({ checkOwner: true })) return message.delete();
         if(message.guild.ownerID != message.author.id) return message.delete();
 
-        const { emoji } = require('../../config/config.json');
 
         const dm = message.content.split(" ").slice(1).join(" ");
         if(!dm) return message.channel.send(`${emoji.x} | Mention a message to DM all users!`);
@@ -23,16 +23,17 @@ module.exports = {
                             member.send(dm);
                         })
                         m.edit(`${emoji.done} | Sent the dm to all users of this guild!`).then(
-                            m.delete()
+                            m.delete({ timeout: 3000 })
                         )
                         return;
-                    } else {
+                    } else {    
                         m.edit(`${emoji.x} | Process terminated`);
+                        m.delete({ timeout: 3000 })
                         return;
                     }
                 })
                 setTimeout(() => {
-                    if(!m) return;
+                    if(m.deleted) return;
                     m.edit(`${emoji.x} | Time up! You did not provide any response, process terminated.`)
                 }, 10000);
             }
