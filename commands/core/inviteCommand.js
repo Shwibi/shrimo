@@ -13,19 +13,17 @@ module.exports = {
             color: 0xfcba03,
             fields: [
                 {
-                    name: `<:Wumpi:748836768543146105> Invite Link!`,
+                    name: `<:Wumpi:748836768543146105> Invite me to your server!`,
                     value: '[»» Invite ««](http://discord.com/oauth2/authorize?client_id=746202084147331092&scope=bot&permissions=8)',
-                    inline: true
+                    
                 },
                 {
                     name: `${emoji.diamond} Support server`,
-                    value: '[»» Join ««](https://discord.gg/FtJ3QGc)',
-                    inline: true
+                    value: '[»» Join ««](https://discord.gg/FtJ3QGc)'
                 },
                 {
                     name: `${emoji.dev} Dev Server`,
-                    value: `[»» Join ««](https://discord.gg/fDuhPKq)`,
-                    inline: true
+                    value: `[»» Join ««](https://discord.gg/fDuhPKq)`
                 }
             ]
         };
