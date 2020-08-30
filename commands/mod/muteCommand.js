@@ -47,7 +47,8 @@ module.exports = {
                             channel.updateOverwrite(mR, {
                                 SEND_MESSAGES: false,
                                 VIEW_MESSAGES: false,
-                                ADD_REACTIONS: false
+                                ADD_REACTIONS: false,
+                                READ_MESSAGES: false
                             })
                         })
                         message.channel.send(" :white_check_mark: | Muted " + muteP.user.username)
