@@ -61,7 +61,7 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `<:Wumpi:748836768543146105> Support server`,
+                        name: `${emoji.diamond} Support server`,
                         value: '[»» Join ««](https://discord.gg/FtJ3QGc)',
                         inline: true
                     },
