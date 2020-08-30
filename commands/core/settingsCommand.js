@@ -114,7 +114,7 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `${emojis.premium}Max tickets <maxtickets>`,
+                        name: `${emoji.premium}Max tickets <maxtickets>`,
                         value: maxtickets,
                         inline: true
                     }
