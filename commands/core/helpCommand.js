@@ -66,7 +66,7 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `${emoji.diamond} Dev Server`,
+                        name: `${emoji.dev} Dev Server`,
                         value: `[»» Join ««](https://discord.gg/fDuhPKq)`,
                         inline: true
                     }
