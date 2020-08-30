@@ -12,24 +12,47 @@ module.exports = {
                 icon_url: message.guild.iconURL()
             },
             title: `${emoji.info} Guild info`,
-            description: 'Guild Information',
-            color: 0xabeb34,
+            description: `Guild ID: ${message.guild.id}`,
+            color: 0x6d32a8,
             fields: [
                 {
                     name: "Guild Members",
-                    value: message.guild.members.cache.size
+                    value: message.guild.members.cache.filter(m => !m.user.bot).size,
+                    inline: true
                 },
                 {
                     name: "Bots",
-                    value: message.guild.members.cache.filter(m => m.user.bot).size
+                    value: message.guild.members.cache.filter(m => m.user.bot).size,
+                    inline: true
+                },
+                {
+                    name: "------------------------",
+                    value: "------------------------"
                 },
                 {
                     name: "Guild roles",
-                    value: message.guild.roles.cache.size 
+                    value: message.guild.roles.cache.size ,
+                    inline: true
                 },
                 {
                     name: "Guild Channels",
-                    value: message.guild.channels.cache.size 
+                    value: message.guild.channels.cache.size,
+                    inline: true
+                },
+                {
+                    name: "AFK Channel",
+                    value: message.guild.afkChannel || "None",
+                    inline: true
+                },
+                {
+                    name: "Boosts",
+                    value: message.guild.premiumSubscriptionCount || "None",
+                    inline: true
+                },
+                {
+                    name: "Region",
+                    value: message.guild.region,
+                    inline: true
                 },
                 {
                     name: "Guild Owner",

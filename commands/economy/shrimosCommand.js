@@ -17,7 +17,7 @@ module.exports = {
         const money = await ecoUser.get('money');
         if(!money) return message.channel.send(`${emoji.x} | Something went wrong with the system, please try again!`);
         const args = message.content.toLowerCase().split(" ");
-        if(!args[1]) {
+        if(!args[1]) {  
             message.channel.send(emoji.x + " | Please specify an action! [send/request]");
             return;
         }

@@ -8,6 +8,7 @@ module.exports = {
             message.channel.send("<a:no:748782299667234966> | No permissions! You have no permissions!");
             return;
         }
+        if(!message.content.split(" ")[1]) return message.channel.send(`<a:no:748782299667234966> | Mention a channel to send to!`)
         const channel = message.mentions.channels.first() || message.content.split(" ")[1].substr(2, 18);
         if(!channel) return message.channel.send("<a:no:748782299667234966> | Mention a channel");
         const searchChannel = message.guild.channels.cache.find(ch => ch.id == channel.id);

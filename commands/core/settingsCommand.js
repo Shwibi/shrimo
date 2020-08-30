@@ -19,7 +19,7 @@ module.exports = {
         const use = args[1];
         const set = args[2];
 
-        const { emoji } = require('../config/config.json');
+        const { emoji } = require('../../config/config.json');
 
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
 

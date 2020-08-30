@@ -6,8 +6,8 @@ module.exports = {
         const args = message.content.toLowerCase().split(" ");
         const action = args[1];
         const user = message.mentions.users.first();
-        const PremiumUsers = require('../models/PremiumUsers');
-        const { emoji } = require('../config/config.json');
+        const PremiumUsers = require('../../models/PremiumUsers');
+        const { emoji } = require('../../config/config.json');
         if(!action) {
             message.channel.send(`${emoji.x} | Please mention an action!`);
             return;

@@ -6,8 +6,9 @@ module.exports = {
         if(!message.member.hasPermission('KICK_MEMBERS')) return;
         const authorRolePosition = message.member.roles.highest.calculatedPosition;
         const mutee = message.mentions.users.first();
-        const muteP = message.guild.members.cache.find(m => m.id == mutee.id);
         if(!mutee) return message.channel.send("<a:no:748782299667234966> | Please mention a user to mute.");
+        const muteP = message.guild.members.cache.find(m => m.id == mutee.id);
+        if(!mutee) return message.channel.send("<a:no:748782299667234966> | Member not found in the server!");
 
         const GuildConfig = require('../../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });

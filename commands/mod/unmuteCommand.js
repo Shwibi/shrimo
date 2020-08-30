@@ -15,6 +15,8 @@ module.exports = {
         }
         const member = message.mentions.users.first();
         // console.log(member);
+        if(!member) return message.channel.send("<a:no:748782299667234966> | Please mention a user to unmute!");
+
         const guildMember = message.guild.members.cache.find(m => m.id == member.id);
         if(!member) return message.channel.send("<a:no:748782299667234966> | Please mention a user to unmute!");
         if(guildMember.roles.cache.has(muteRole.id)) {
