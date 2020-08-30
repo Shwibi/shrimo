@@ -3,7 +3,7 @@ module.exports = {
     help: "CHOCOLATE!",
     async execute(message, client) {
 
-        const PremiumUsers = require('../models/PremiumUsers');
+        const PremiumUsers = require('../../models/PremiumUsers');
         const premiumUser = await PremiumUsers.findOne({ userId: message.author.id });
         if(!premiumUser) {
             await PremiumUsers.create({

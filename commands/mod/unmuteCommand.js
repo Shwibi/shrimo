@@ -1,4 +1,4 @@
-const { execute } = require("./hugCommand");
+
 
 module.exports = {
     name: 'unmute',
@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, client) {
         if(!message.member.hasPermission('KICK_MEMBERS')) return;
 
-        const GuildConfig = require('../models/GuildConfig');
+        const GuildConfig = require('../../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
         const muteRoleID = await guildConfig.get('muted');
         const muteRole = message.guild.roles.cache.find(r => r.id == muteRoleID);

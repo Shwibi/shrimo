@@ -1,5 +1,3 @@
-const { execute } = require("./suggestCommand");
-
 module.exports = {
     name: 'invite',
     help: '<prefix>invite \nGets the invite link for the bot! Thanks!',

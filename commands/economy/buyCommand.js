@@ -3,8 +3,8 @@ module.exports = {
     help: '[Under Construction]',
     async execute(message, client) {
 
-        const { emoji } = require('../config/config.json');
-        const Economy = require('../models/Economy');
+        const { emoji } = require('../../config/config.json');
+        const Economy = require('../../models/Economy');
         const ecoUser = await Economy.findOne({ userId: message.author.id });
         if(!ecoUser) return message.channel.send(`${emoji.x} | Please use the money command once to start your expediture on shrimo points!`);
         const args = message.content.toLowerCase().split(" ");

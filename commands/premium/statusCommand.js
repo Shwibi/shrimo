@@ -1,10 +1,10 @@
-const { emoji } = require('../config/config.json');
+const { emoji } = require('../../config/config.json');
 
 module.exports = {
     name: 'status',
     help: '<prefix>status New bot status \nSet the bot status to something! \n**PREMIUM COMMAND**' + emoji.premium,
     async execute(message, client) {
-        const PremiumUsers = await require('../models/PremiumUsers');
+        const PremiumUsers = await require('../../models/PremiumUsers');
         const premiumUser = await PremiumUsers.findOne({ userId: message.author.id});
         
         if(!premiumUser) return message.channel.send(`${emoji.x} | You are not a premium user.`);

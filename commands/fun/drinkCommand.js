@@ -1,5 +1,5 @@
 
-const { emoji } = require('../config/config.json');
+const { emoji } = require('../../config/config.json');
 
 module.exports = {
     name: 'drink',

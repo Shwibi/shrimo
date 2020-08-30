@@ -94,9 +94,34 @@ module.exports = async (client, message) => {
         );
     }
     client.commands = new Discord.Collection();
-    const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('Command.js'));
-    for(const file of commandFiles) {
-        const command = require(`../commands/${file}`);
+    // const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('Command.js'));
+    // for(const file of commandFiles) {
+    //     const command = require(`../commands/${file}`);
+    //     client.commands.set(command.name, command);
+    // };
+    const commandFilesfun = fs.readdirSync('./commands/fun').filter(file => file.endsWith('Command.js'));
+    for(const file of commandFilesfun) {
+        const command = require(`../commands/fun/${file}`);
+        client.commands.set(command.name, command);
+    };
+    const commandFilescore = fs.readdirSync('./commands/core/').filter(file => file.endsWith('Command.js'));
+    for(const file of commandFilescore) {
+        const command = require(`../commands/core/${file}`);
+        client.commands.set(command.name, command);
+    };
+    const commandFileseco = fs.readdirSync('./commands/economy/').filter(file => file.endsWith('Command.js'));
+    for(const file of commandFileseco) {
+        const command = require(`../commands/economy/${file}`);
+        client.commands.set(command.name, command);
+    };
+    const commandFilesmod = fs.readdirSync('./commands/mod/').filter(file => file.endsWith('Command.js'));
+    for(const file of commandFilesmod) {
+        const command = require(`../commands/mod/${file}`);
+        client.commands.set(command.name, command);
+    };
+    const commandFilespre = fs.readdirSync('./commands/premium/').filter(file => file.endsWith('Command.js'));
+    for(const file of commandFilespre) {
+        const command = require(`../commands/premium/${file}`);
         client.commands.set(command.name, command);
     };
 

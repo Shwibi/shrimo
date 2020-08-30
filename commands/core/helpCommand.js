@@ -2,7 +2,7 @@ module.exports = {
     name: 'help',
     help: "u kiddin me? THIS IS THE HELP COMMAND JUST USE IT *internal scream*",
     async execute(message, client) {
-        const GuildConfig = require('../models/GuildConfig');
+        const GuildConfig = require('../../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
         const prefix = guildConfig.get('prefix');
         const fs = require('fs');
@@ -13,7 +13,7 @@ module.exports = {
             color: 0xfcba03
         };
         message.channel.send({ embed: help });
-        const { emoji } = require('../config/config.json');
+        const { emoji } = require('../../config/config.json');
 
         setTimeout(() => {
             const em = {

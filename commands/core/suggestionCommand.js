@@ -4,7 +4,7 @@ module.exports = {
     name: 'suggestion',
     help: '<prefix>suggestion <id> \nGet your suggestion from your suggestion id!',
     async execute(message, client) {
-        const Suggestions = require('../models/Suggestions');
+        const Suggestions = require('../../models/Suggestions');
         const args = message.content.split(" ");
         const suggestionID = args[1];
         if(!args[1]) return message.channel.send("<a:no:748782299667234966> | Please mention the ID of your suggestion to search!");

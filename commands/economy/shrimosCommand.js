@@ -1,4 +1,4 @@
-const { execute } = require("./premiumCommand");
+
 
 module.exports = {
     name: 'shrimos',
@@ -6,11 +6,12 @@ module.exports = {
     async execute(message, client) {
 
         
-        const { emoji } = require('../config/config.json');
+        const { emoji } = require('../../config/config.json');
         const user = message.mentions.users.first();
+        if(!user) return message.channel.send(`${emoji.x} Mention!`)
         if(user.id == message.author.id && message.author.id != '700328450270953503') return message.channel.send(`${emoji.x} You cannot perform functions on yourself!`);
 
-        const Economy = require('../models/Economy');
+        const Economy = require('../../models/Economy');
         const ecoUser = await Economy.findOne({ userId: message.author.id });
         if(!ecoUser) return message.channel.send(`${emoji.x} | Please start your expedition on shrimos by typing <prefix>money once!`);
         const money = await ecoUser.get('money');

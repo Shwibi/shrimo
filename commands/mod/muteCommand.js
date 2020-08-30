@@ -1,4 +1,3 @@
-const { execute } = require("./hugCommand");
 
 module.exports = {
     name: 'mute',
@@ -10,7 +9,7 @@ module.exports = {
         const muteP = message.guild.members.cache.find(m => m.id == mutee.id);
         if(!mutee) return message.channel.send("<a:no:748782299667234966> | Please mention a user to mute.");
 
-        const GuildConfig = require('../models/GuildConfig');
+        const GuildConfig = require('../../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
         const muteRole = await guildConfig.get('muted');
         // console.log(muteRole);

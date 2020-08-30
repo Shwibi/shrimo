@@ -1,5 +1,4 @@
-const { execute } = require("./hugCommand");
-const { Guild } = require("discord.js");
+
 
 module.exports = {
     name: 'boop',

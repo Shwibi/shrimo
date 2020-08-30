@@ -1,5 +1,3 @@
-const { execute } = require("./settingsCommand");
-
 module.exports = {
     name: 'ticket',
     help: '<prefix>ticket create | <prefix>ticket close #ticket | <prefix>ticket closed @user\nMod Support tickets! Create, close, and remove!' + 
@@ -9,11 +7,11 @@ module.exports = {
     async execute(message, client) {
 
         const args = message.content.toLowerCase().split(" ");
-        const GuildConfig = require('../models/GuildConfig');
+        const GuildConfig = require('../../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
         const ticket = await guildConfig.get('ticket_channel');
         const logs = await guildConfig.get('ticket_logs');
-        const Tickets = require('../models/Tickets');
+        const Tickets = require('../../models/Tickets');
         const userTickets = await Tickets.findOne({ userId: message.author.id, guildId: message.guild.id })
         
         const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);

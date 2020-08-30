@@ -1,11 +1,11 @@
-const { execute } = require("./buyCommand");
+
 
 module.exports = {
     name: 'use',
     help: '[Under Construction]',
     async execute(message, client) {
-        const { emoji } = require('../config/config.json');
-        const Economy = require('../models/Economy');
+        const { emoji } = require('../../config/config.json');
+        const Economy = require('../../models/Economy');
         const ecoUser = await Economy.findOne({ userId: message.author.id });
 
         if(!ecoUser) {
@@ -22,7 +22,7 @@ module.exports = {
                         message.channel.send(`${emoji.time} | Using premium...`).then(
                             async m => {
 
-                                const PremiumUsers = require('../models/PremiumUsers');
+                                const PremiumUsers = require('../../models/PremiumUsers');
                                 const premiumUser = await PremiumUsers.findOne({ userId: message.author.id });
                                 if(!premiumUser) {
                                     await ecoUser.updateOne({
@@ -124,7 +124,7 @@ module.exports = {
                 message.channel.send(`:coffee: Drinking hot fresh coffee!`).then(
                     m => {
                         setTimeout(() => {
-                            m.edit(`${emoji.emptycoffee} Ah! So fresh! *Successfully drank coffee and acheived caffienism*`)
+                            m.edit(`${emoji.emptycoffee} Ah! So fresh!      *Successfully drank coffee and acheived caffienism*`)
                         }, 3000)
                     }
                 )

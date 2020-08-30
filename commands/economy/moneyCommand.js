@@ -1,11 +1,11 @@
-const { execute } = require("./premiumCommand");
+
 
 module.exports = {
     name: 'money',
     help: '[Under Construction]',
     async execute(message, client) {
-        const { emoji } = require('../config/config.json');
-        const Economy = require('../models/Economy');
+        const { emoji } = require('../../config/config.json');
+        const Economy = require('../../models/Economy');
         const moneyUser = await Economy.findOne({ userId: message.author.id });
         if(!moneyUser) {
             await Economy.create({

@@ -1,5 +1,3 @@
-const { execute } = require("./suggestCommand");
-const { GuildMember } = require("discord.js");
 
 module.exports = {
     name: 'purge',

@@ -1,4 +1,4 @@
-const GuildConfig = require('../models/GuildConfig');
+const GuildConfig = require('../../models/GuildConfig');
 
 
 module.exports = {

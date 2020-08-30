@@ -2,7 +2,7 @@ module.exports = {
     name: 'suggest',
     help: '<prefix>suggest <suggestion> \nSuggest something new to add to the bot :D',
     async execute(message, client) {
-        const Suggestions = require('../models/Suggestions');
+        const Suggestions = require('../../models/Suggestions');
         const args = message.content.split(" ");
         if(!args[1]) return message.channel.send("<a:no:748782299667234966> | We appreciate your thought, but please add a suggestion to suggest something or 'get' to get a suggestion you suggested before :sweat_smile:");
         const suggestion = args.slice(1).join(" ");

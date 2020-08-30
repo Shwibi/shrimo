@@ -7,7 +7,7 @@ module.exports = {
         if(!message.member.hasPermission({ checkOwner: true })) return message.delete();
         if(message.guild.ownerID != message.author.id) return message.delete();
 
-        const { emoji } = require('../config/config.json');
+        const { emoji } = require('../../config/config.json');
 
         const dm = message.content.split(" ").slice(1).join(" ");
         if(!dm) return message.channel.send(`${emoji.x} | Mention a message to DM all users!`);

@@ -3,7 +3,7 @@ module.exports = {
     async execute(message, client){
 
         message.delete();
-        const GuildConfig = require('../models/GuildConfig');
+        const GuildConfig = require('../../models/GuildConfig');
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
 
         const verify = await guildConfig.get('verify');
