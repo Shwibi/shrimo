@@ -13,14 +13,15 @@ module.exports = {
         const logs = await guildConfig.get('ticket_logs');
         const Tickets = require('../../models/Tickets');
         const userTickets = await Tickets.findOne({ userId: message.author.id, guildId: message.guild.id })
-        const maxtickets = await guildConfig.get('maxTickets');
+        let maxtickets = await guildConfig.get('maxTickets') ? await guildConfig.get('maxTickets') : 3;
+        
 
 
         const logChannel = message.guild.channels.cache.find(ch => ch.id == logs);
         
         let x;
 
-        if(!ticket || !logs) return message.delete().then(message.channel.send(" <a:no:748782299667234966> | Ticketing not setup for this server!"))
+        if(!ticket || !logs) return message.channel.send(" <a:no:748782299667234966> | Ticketing not setup for this server!")
         if(args[1] == 'create') {
             if(!userTickets) {
                 const userTicket = await Tickets.create({
@@ -43,7 +44,7 @@ module.exports = {
                         },
                     ],
                 }).then(
-                    ch => {
+                    async ch => {
                         // const ticketClaimChannel = message.guild.channels.cache.find(ch => ch.name == 'ticket-claiming');
     
                         const embed = {
@@ -60,17 +61,17 @@ module.exports = {
                                     value: `<#${ch.id}>`
                                 },
                                 {
-                                    name: 'User',
+                                    name: "User",
                                     value: `<@${message.author.id}>`
                                 }
                             ]
                         };
-                        logChannel.send({ embed: embed }).then(
-                            m => {
-                                m.react('🎯');
+                        await logChannel.send({ embed: embed }).then(
+                            async m => {
+                                await m.react('🎯');
                             }
                         );
-                        ch.send(`<@${message.author.id}> Support will be right with you!`)
+                        await ch.send(`<@${message.author.id}> Support will be right with you!`)
                     }
                 );
             } else {
@@ -83,9 +84,8 @@ module.exports = {
                 await userTickets.updateOne({
                     count: newCount
                 })
-            if(message.channel.id != ticket) return message.delete().then(message.channel.send('<a:no:748782299667234966> | Please use the ticket channel for opening tickets.').then(m => m.delete({ timeout: 5000 })))
+            if(message.channel.id != ticket) return message.channel.send('<a:no:748782299667234966> | Please use the ticket channel for opening tickets.').then(m => m.delete({ timeout: 5000 }))
 
-            message.delete();
 
 
             message.guild.channels.create(`ticket-${message.author.username}-${newCount}`, {
@@ -101,7 +101,7 @@ module.exports = {
                     },
                 ],
             }).then(
-                ch => {
+                async ch => {
                     // const ticketClaimChannel = message.guild.channels.cache.find(ch => ch.name == 'ticket-claiming');
 
                     const embed = {
@@ -116,17 +116,21 @@ module.exports = {
                             {
                                 name: 'Ticket',
                                 value: `<#${ch.id}>`
+                            },
+                            {
+                                name: 'User',
+                                value: `<@${message.author.id}>`
                             }
                         ]
                     };
-                    logChannel.send({ embed: embed }).then(
-                        m => {
-                            m.react('🎯');
+                    await logChannel.send({ embed: embed }).then(
+                        async m => {
+                            await m.react('🎯').catch(err => console.log(err));
                         }
-                    );
-                    ch.send(`<@${message.author.id}> Support will be right with you!`)
+                    ).catch(err => console.log(err));
+                    await ch.send(`<@${message.author.id}> Support will be right with you!`).catch(err => console.log(err));
                 }
-            );
+            ).catch(err => console.log(err));
             }
             
 

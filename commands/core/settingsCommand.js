@@ -114,8 +114,8 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `Max tickets <maxtickets> ${emoji.premium} PREMIUM`,
-                        value: maxtickets,
+                        name: `Max tickets <maxtickets>`,
+                        value: maxtickets + `   -**${emoji.premium} PREMIUM**`,
                         inline: true
                     }
                 ],
@@ -373,10 +373,22 @@ module.exports = {
             if(!premiumUser) message.channel.send(`${emoji.x} | You are not a premium user! ${emoji.premium}`);
 
             if(!set) return message.channel.send(`${emoji.x} | Please mention the max number of tickets to set!`);
-
+            if(set == "remove") {
+                message.channel.send(`${emoji.time} Resetting max tickets...`).then(
+                    async m => {
+                        await guildConfig.updateOne({
+                            maxTickets: 3
+                        }).then(
+                            m.edit(`${emoji.done} | Reset Max tickets to 3!`)
+                        ).catch(err => m.edit(`${emoji.x} | Something went wrong! Please contact the support server!`).then(console.log(err)))
+                    }
+                    
+                )
+                return;
+            }
             if(isNaN(set)) return message.channel.send(`${emoji.x} | Max tickets has to be a number!`);
             if(set > 30) return message.channel.send(`${emoji.x} | Max tickets have to be less than 30!`);
-            if(set < 3) return message.channel.send(`${emoji.x} You know ver well why this shouldn't work.`);
+            if(set < 3) return message.channel.send(`${emoji.x} You know very well why this shouldn't work.`);
             message.channel.send(`${emoji.time} Setting max tickets to ${set}...`).then(
                 async m => {
                         await guildConfig.updateOne({
