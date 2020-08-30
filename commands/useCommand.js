@@ -114,6 +114,22 @@ module.exports = {
                 })
             )
         }
+        else if(args[1] == 'coffee') {
+            if(!storage.includes('coffee')) return message.channel.send(`${emoji.x} | You do not have coffee!`);
+            await ecoUser.updateOne({
+                $pull : {
+                    storage: 'coffee'
+                }
+            }).then(
+                message.channel.send(`:coffee: Drinking hot fresh coffee!`).then(
+                    m => {
+                        setTimeout(() => {
+                            m.edit(`${emoji.emptycoffee} Ah! So fresh! *Successfully drank coffee and acheived caffienism*`)
+                        }, 3000)
+                    }
+                )
+            )
+        }
 
     }
 }

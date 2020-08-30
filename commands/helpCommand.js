@@ -36,7 +36,7 @@ module.exports = {
                         inline: true    
                     },
                     {
-                        name: "<:mod:748754150715687022> Mod",
+                        name: emoji.mod + " Mod",
                         value: 'dm, send, mute, \nunmute, ticket closed, \npurge, dmall',
                         inline: true
                     },
@@ -46,7 +46,7 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `${emoji.money} Economy`,
+                        name: `${emoji.coin} Economy`,
                         value: `buy, shrimos, use, money`,
                         inline: true
                     },
