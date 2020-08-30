@@ -45,10 +45,8 @@ module.exports = {
                         const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category');
                         channels.forEach(channel => {
                             channel.updateOverwrite(mR, {
-                                READ_MESSAGES: false
-                            })
-                            channel.updateOverwrite(mR, {
-                                SEND_MESSAGESs: false
+                                VIEW_CHANNEL: false,
+                                SEND_MESSAGES: false
                             })
                         })
                         message.channel.send(" :white_check_mark: | Muted " + muteP.user.username)
