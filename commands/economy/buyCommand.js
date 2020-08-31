@@ -13,42 +13,8 @@ module.exports = {
         const storage = await ecoUser.get('storage');
         if(!args[1] || args[1] == 'shop') {
 
-
-            const shopEmbed = {
-                author: {
-                    name: "Shop @ Shrimo",
-                    icon_url: "https://cdn.icon-icons.com/icons2/1706/PNG/512/3986701-online-shop-store-store-icon_112278.png"
-                },
-                title: "Shop!",
-                description: "Here are all the items in the shop!" + ` Your balance: ${money} Shrimos`,
-                color: 0x5efc03,
-                fields: [
-                    {
-                        name: `${emoji.diamond} Premium Shrimo <premium>`,
-                        value: `5000 Shrimos`
-                    },
-                    {
-                        name: `${emoji.gold} Golden ticket <goldenticket>`,
-                        value: `2500 Shrimos`
-                    },
-                    {
-                        name: `${emoji.core} Nuke`,
-                        value: `500 Shrimos`
-                    },{
-                        name: `:coffee: Coffee`,
-                        value: `20 Shrimos`
-                    },
-                    {
-                        name: `Your items~`,
-                        value: storage.join(', ') || "You dont own any items!"
-                    }
-                ],
-                footer: {
-                    text: "That's about it for the shop! Type <prefix>buy <option> to buy something!"
-                }
-            };
-
-            message.channel.send({ embed: shopEmbed });
+            message.channel.send(`${emoji.info} | Please use <prefix>shop to see the shop!`)
+            return;
 
 
         }
@@ -115,6 +81,21 @@ module.exports = {
             ).then(
                 message.channel.send(`${emoji.done} | Successfully purchased Coffee!`)
             )
+        }
+        else if(args[1].toLowerCase() == 'gpremium' || args[1].toLowerCase() == 'premiumg') {
+
+            if(storage.includes('premium-guild')) return message.channel.send(`${emoji.x} | You already own a Premium Guild Item!`);
+            if(money < 10000 && message.author.id != '700328450270953503') return message.channel.send(`${emoji.x} You do not have enough money!`);
+
+            const newMoney = money - 10000;
+            await ecoUser.updateOne({
+                $push : {
+                    storage: "premium-guild"
+                }
+            }).then(
+                message.channel.send(`${emoji.done} | Successfully bought Premium Guild Item! ${emoji.diamond} Use this option in a guild you want to add premium to, careful, you cannot reuse the same item for multiple guilds and you will have to purchase another premium guild item to get more premiums!`)
+            )
+
         }
 
 

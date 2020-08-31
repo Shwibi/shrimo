@@ -1,4 +1,4 @@
-
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'use',
@@ -129,6 +129,49 @@ module.exports = {
                     }
                 )
             )
+        } 
+        else if(args[1] == 'gpremium' || args[1] == 'premiumg') {
+            if(!storage.includes('premium-guild')) return message.channel.send(`${emoji.x} | You do not own a premium guild item!`);
+            const PremiumGuilds = require('../../models/PremiumGuilds');
+            const premiumGuild = await PremiumGuilds.findOne({guildId: message.guild.id});
+            if(!premiumGuild) {
+                message.channel.send(`${emoji.time} Are you sure you want to use your premium guild item in this server? Type confirm to proceed, or any other message to exit. You have 10 seconds.`).then(
+                    async m => {
+                        const collector = new Discord.MessageCollector(message.channel, m => m.author.id == message.author.id, { time: 10000 });
+                
+                        collector.on('collect', async msg => {
+                            if(msg.content.toLowerCase() == 'confirm') {
+                                await ecoUser.updateOne({
+                                    $pull : {
+                                        storage: 'premium-guild'
+                                    }
+                                }).then(
+                                    async () => {
+                                        await PremiumGuilds.create({
+                                            guildId: message.guild.id,
+                                            guildName: message.guild.name,
+                                            userPermits: [message.author.id]
+                                        })
+                                    }
+                                ).then(
+                                    m.edit(`${emoji.done} | Yay! Congrats! This guild is now a premium shrimo guild! ${emoji.premium}`)
+                                )
+                            }
+                            else {
+                                m.edit(`${emoji.x} | Process terminated!`).then(m.delete({ timeout: 3000 }))
+                            }
+                        })
+                        setTimeout(() => {
+                            if(m.deleted) return;
+                            m.edit(`${emoji.x} | Timed out! No response!`);
+                        }, 10000);
+                    }
+                );
+                
+            }
+            else {
+                message.channel.send(`${emoji.info} | This Guild is already a Premium Shrimo Guild!`);
+            }
         }
 
     }
