@@ -3,7 +3,7 @@ module.exports = {
     name: 'server',
     help: '<prefix>server \nKnow about this server \n**PREMIUM COMMAND**' + emoji.premium,
     async execute(message, client) {
-        const PremiumUsers = require('../../models/PremiumUsers');
+        const PremiumGuilds = require('../../models/PremiumGuilds');
         const premiumUser = await PremiumUsers.findOne({ userId: message.author.id });
         if(!premiumUser) return message.channel.send(`${emoji.x} | You are not a premium user.`);
         const embed = {

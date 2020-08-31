@@ -47,8 +47,7 @@ module.exports = {
                     const list = [`${emoji.premium} **Premium Users:** `];
                     const cursor = await PremiumUsers.find().stream();
                     cursor.on('data', doc => {
-                        console.log(doc.userTag);
-                        list.push(doc.userTag);
+                        list.push(`**${doc.userTag}** - [${doc.userId}]\n---------------------`);
                     })
                     setTimeout(() => {
                         m.edit(`${emoji.done} Here's the premium list!`).then(
