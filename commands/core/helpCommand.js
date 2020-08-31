@@ -37,7 +37,7 @@ module.exports = {
                     },
                     {
                         name: emoji.mod + " Mod",
-                        value: 'dm, send, mute, \nunmute, ticket closed, \npurge, dmall',
+                        value: 'dm, send, mute, \nunmute, ticket closed, \npurge, dmall, lock',
                         inline: true
                     },
                     {
