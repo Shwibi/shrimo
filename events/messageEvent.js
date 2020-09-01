@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const GuildConfig = require('../models/GuildConfig');
+const path = require('path');
 
 module.exports = async (client, message) => {
     if(!message.guild) {
@@ -119,36 +120,44 @@ module.exports = async (client, message) => {
     //     const command = require(`../commands/${file}`);
     //     client.commands.set(command.name, command);
     // };
-    const commandFilesfun = fs.readdirSync('./commands/fun').filter(file => file.endsWith('Command.js'));
-    for(const file of commandFilesfun) {
-        const command = require(`../commands/fun/${file}`);
-        client.commands.set(command.name, command);
-    };
-    const commandFilesgold = fs.readdirSync('./commands/gold').filter(file => file.endsWith('Command.js'));
-    for(const file of commandFilesgold) {
-        const command = require(`../commands/gold/${file}`);
-        client.commands.set(command.name, command);
-    };
-    const commandFilescore = fs.readdirSync('./commands/core/').filter(file => file.endsWith('Command.js'));
-    for(const file of commandFilescore) {
-        const command = require(`../commands/core/${file}`);
-        client.commands.set(command.name, command);
-    };
-    const commandFileseco = fs.readdirSync('./commands/economy/').filter(file => file.endsWith('Command.js'));
-    for(const file of commandFileseco) {
-        const command = require(`../commands/economy/${file}`);
-        client.commands.set(command.name, command);
-    };
-    const commandFilesmod = fs.readdirSync('./commands/mod/').filter(file => file.endsWith('Command.js'));
-    for(const file of commandFilesmod) {
-        const command = require(`../commands/mod/${file}`);
-        client.commands.set(command.name, command);
-    };
-    const commandFilespre = fs.readdirSync('./commands/premium/').filter(file => file.endsWith('Command.js'));
-    for(const file of commandFilespre) {
-        const command = require(`../commands/premium/${file}`);
-        client.commands.set(command.name, command);
-    };
+    const commandFolders = fs.readdirSync('./commands');
+    for(const folder of commandFolders) {
+        const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('Command.js'));
+        for(const file of commandFiles) {
+            const command = require(`../commands/${folder}/${file}`);
+            client.commands.set(command.name, command);
+        }
+    }
+    // const commandFilesfun = fs.readdirSync('./commands/fun').filter(file => file.endsWith('Command.js'));
+    // for(const file of commandFilesfun) {
+    //     const command = require(`../commands/fun/${file}`);
+    //     client.commands.set(command.name, command);
+    // };
+    // const commandFilesgold = fs.readdirSync('./commands/gold').filter(file => file.endsWith('Command.js'));
+    // for(const file of commandFilesgold) {
+    //     const command = require(`../commands/gold/${file}`);
+    //     client.commands.set(command.name, command);
+    // };
+    // const commandFilescore = fs.readdirSync('./commands/core/').filter(file => file.endsWith('Command.js'));
+    // for(const file of commandFilescore) {
+    //     const command = require(`../commands/core/${file}`);
+    //     client.commands.set(command.name, command);
+    // };
+    // const commandFileseco = fs.readdirSync('./commands/economy/').filter(file => file.endsWith('Command.js'));
+    // for(const file of commandFileseco) {
+    //     const command = require(`../commands/economy/${file}`);
+    //     client.commands.set(command.name, command);
+    // };
+    // const commandFilesmod = fs.readdirSync('./commands/mod/').filter(file => file.endsWith('Command.js'));
+    // for(const file of commandFilesmod) {
+    //     const command = require(`../commands/mod/${file}`);
+    //     client.commands.set(command.name, command);
+    // };
+    // const commandFilespre = fs.readdirSync('./commands/premium/').filter(file => file.endsWith('Command.js'));
+    // for(const file of commandFilespre) {
+    //     const command = require(`../commands/premium/${file}`);
+    //     client.commands.set(command.name, command);
+    // };
 
     const config = require('../config/config.json');
     
