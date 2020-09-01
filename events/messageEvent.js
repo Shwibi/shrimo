@@ -56,6 +56,26 @@ module.exports = async (client, message) => {
         return;
         
     }
+
+    if(!message.author.bot) {
+        const Gold = require('../models/Gold');
+        const goldUserFetch = await Gold.findOne({ userId: message.author.id, guildId: message.guild.id});
+        if(!goldUserFetch && !message.author.bot) {
+            const goldUser = await Gold.create({
+                userId: message.author.id,
+                guildId: message.guild.id,
+                gold: 5
+            })
+        } else {
+            const currentGold = await goldUserFetch.get('gold');
+            const add = Math.floor(Math.random() * 7);
+            const newGold = currentGold + add;
+            await goldUserFetch.updateOne({
+                gold: newGold
+            })
+        }
+    }
+
     // if(message.channel.id == '746217071620128879') message.delete();
     // const gConf = await GuildConfig.findOne({ guildId: message.guild.id });
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
@@ -102,6 +122,11 @@ module.exports = async (client, message) => {
     const commandFilesfun = fs.readdirSync('./commands/fun').filter(file => file.endsWith('Command.js'));
     for(const file of commandFilesfun) {
         const command = require(`../commands/fun/${file}`);
+        client.commands.set(command.name, command);
+    };
+    const commandFilesgold = fs.readdirSync('./commands/gold').filter(file => file.endsWith('Command.js'));
+    for(const file of commandFilesgold) {
+        const command = require(`../commands/gold/${file}`);
         client.commands.set(command.name, command);
     };
     const commandFilescore = fs.readdirSync('./commands/core/').filter(file => file.endsWith('Command.js'));

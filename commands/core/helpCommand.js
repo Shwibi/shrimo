@@ -51,8 +51,8 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: '\u200b',
-                        value: '\u200b',
+                        name: `:speech_left: Gold (Chat exp)`,
+                        value: 'gold',
                         inline: true
                     },
                     {
