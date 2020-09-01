@@ -46,12 +46,12 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `${emoji.gold} Economy`,
+                        name: `${emoji.coin} Economy`,
                         value: `buy, shrimos, use, money`,
                         inline: true
                     },
                     {
-                        name: `:speech_left: Gold (Chat exp)`,
+                        name: `${emoji.gold} Gold (Chat exp)`,
                         value: 'gold',
                         inline: true
                     },
