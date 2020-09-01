@@ -46,7 +46,7 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `${emoji.coin} Economy`,
+                        name: `${emoji.gold} Economy`,
                         value: `buy, shrimos, use, money`,
                         inline: true
                     },
