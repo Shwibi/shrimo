@@ -4,4 +4,5 @@ test.js
 shwi.json
 .env
 premium.js
-functions/
+start-bot.cmd
+test.js

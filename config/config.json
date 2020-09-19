@@ -1,6 +1,6 @@
 {
-    "BOT" : {
-        "PREFIX" : "s?"
+    "BOT": {
+        "PREFIX": "s?"
     },
     "emoji": {
         "done": "<:done:748753320625045535>",
@@ -26,6 +26,7 @@
         "money": "<:money:749285261363380234>",
         "coin": "<a:coin:749456393488171028>",
         "modhammer": "<a:modhammer:749457031278100491>",
-        "emptycoffee": "<:emptycoffee:749458465193328670>"
+        "emptycoffee": "<:emptycoffee:749458465193328670>",
+        "amalgam": "<:imshook:676618882295005214>"
     }
 }

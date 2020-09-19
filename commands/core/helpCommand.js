@@ -33,7 +33,7 @@ module.exports = {
                     {
                         name: "<a:core:748753320885092384> Core",
                         value: 'birthday, help, settings, \nslow, suggest, invite, \nsuggestion, ticket, tickets',
-                        inline: true    
+                        inline: true
                     },
                     {
                         name: emoji.mod + " Mod",
@@ -72,6 +72,16 @@ module.exports = {
                     {
                         name: `${emoji.dev} Dev Server`,
                         value: `[»» Join ««](https://discord.gg/fDuhPKq)`,
+                        inline: true
+                    },
+                    {
+                        name: `${emoji.amalgam} Join Amalgam!`,
+                        value: `[»» Join ««](https://discord.gg/y6Zqkgs)`,
+                        inline: true
+                    },
+                    {
+                        name: `${emoji.amalgam} Join Rhyme Wars!`,
+                        value: `[»» Join ««](https://discord.gg/AEXRbhR)`,
                         inline: true
                     }
                 ],
