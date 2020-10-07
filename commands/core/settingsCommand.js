@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, client) {
 
         message.delete();
-        if(!message.member.hasPermission('ADMINISTRATOR')) return;
+        if (!message.member.hasPermission('ADMINISTRATOR')) return;
 
         const args = message.content.toLowerCase().split(" ");
 
@@ -20,57 +20,59 @@ module.exports = {
         const use = args[1];
         const set = args[2];
 
-        const { emoji } = require('../../config/config.json');
+        const { emoji, theme } = require('../../config/config.json');
+        const themes = require('../../config/themes.json');
+        const indexLine = Math.floor(Math.random() * themes[theme].lines.length);
 
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id });
 
         const prefix = guildConfig.get('prefix');
         // if(!args || !use || !set) return message.channel.send("Invalid command usage");
-        
+
         let welcome = guildConfig.get('welcome');
-        if(welcome)  welcome = `<#${guildConfig.get('welcome')}>`
+        if (welcome) welcome = `<#${guildConfig.get('welcome')}>`
         else welcome = "Not set"
 
         let muted = guildConfig.get('muted');
-        if(muted)  muted = `<@&${guildConfig.get('muted')}>`
+        if (muted) muted = `<@&${guildConfig.get('muted')}>`
         else muted = "Not set"
 
         let def = guildConfig.get('defaultRole');
-        if(def) def = `<@&${guildConfig.get('defaultRole')}>`
+        if (def) def = `<@&${guildConfig.get('defaultRole')}>`
         else def = "Not set"
 
         let logs = guildConfig.get('logs');
-        if(logs)  logs = `<#${guildConfig.get('logs')}>`
+        if (logs) logs = `<#${guildConfig.get('logs')}>`
         else logs = "Not set"
 
         let verify = guildConfig.get('verify');
-        if(verify) verify = `<#${guildConfig.get('verify')}>`
+        if (verify) verify = `<#${guildConfig.get('verify')}>`
         else verify = "Not set"
 
         let underage = guildConfig.get('underage');
-        if(underage) underage = `<@&${underage}>`
+        if (underage) underage = `<@&${underage}>`
         else underage = "Not set"
 
         let ticket = guildConfig.get('ticket_channel');
-        if(ticket) ticket = `<#${ticket}>`
+        if (ticket) ticket = `<#${ticket}>`
         else ticket = "Not set"
 
         let ticketLogs = guildConfig.get('ticket_logs');
-        if(ticketLogs) ticketLogs = `<#${ticketLogs}>`
+        if (ticketLogs) ticketLogs = `<#${ticketLogs}>`
         else ticketLogs = "Not set"
 
         let ghostping = guildConfig.get('ghostPing');
         ghostping = ghostping == true ? `${emoji.done} Detecting` : `${emoji.x} Not Detecting`
 
         let maxtickets = guildConfig.get('maxTickets');
-        if(maxtickets) maxtickets = maxtickets
+        if (maxtickets) maxtickets = maxtickets
         else maxtickets = `Not set`
 
-        if(!use && !set) {
+        if (!use && !set) {
             const current = {
-                title: "Current settings",
-                description: "Here are the current settings for the server",
-                color: 0xeb4034,
+                title: "Current settings | " + themes[theme].lines[indexLine],
+                description: "Here are the current settings for the server \n" + themes[theme].description,
+                color: themes[theme].side_color.json,
                 fields: [
                     {
                         name: 'Prefix <prefix>',
@@ -120,8 +122,8 @@ module.exports = {
                     }
                 ],
                 footer: {
-                    text: 'To assign/change a setting, type ' + `${prefix}settings <setting> <new value>` + 
-                           `To remove a setting, type ${prefix}settings <setting> remove`
+                    text: 'To assign/change a setting, type ' + `${prefix}settings <setting> <new value>` +
+                        `To remove a setting, type ${prefix}settings <setting> remove`
                 }
             };
 
@@ -129,14 +131,14 @@ module.exports = {
             return;
         }
 
-        if(!settings.includes(use)) {
+        if (!settings.includes(use)) {
             return message.channel.send("<a:no:748782299667234966> | No such settings present.");
         }
 
         // const setting = guildConfig.get(use);
 
-        if(use == 'prefix') {
-            if(set == "remove") {
+        if (use == 'prefix') {
+            if (set == "remove") {
                 message.channel.send("<a:no:748782299667234966> | You won't be able to use any bot commands if you remove the prefix... So no.");
                 return;
             }
@@ -148,8 +150,8 @@ module.exports = {
                 message.channel.send(`:white_check_mark: | Successfully updated prefix to ${set}`)
             )
         }
-        else if(use == 'welcome') {
-            if(set == 'remove') {
+        else if (use == 'welcome') {
+            if (set == 'remove') {
                 guildConfig.updateOne({
                     welcome: null
                 }).then(
@@ -159,15 +161,15 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
+            if (!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 welcome: newSet
             }).then(
                 message.channel.send(`:white_check_mark: | Successfully updated welcome channel to <#${search.id}>`)
             )
         }
-        else if(use == 'muted') {
-            if(set == 'remove') {
+        else if (use == 'muted') {
+            if (set == 'remove') {
                 guildConfig.updateOne({
                     muted: null
                 }).then(
@@ -182,7 +184,7 @@ module.exports = {
             //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
             //     return;
             // }
-            if(!search)  return message.channel.send("<a:no:748782299667234966> | No such role found.");
+            if (!search) return message.channel.send("<a:no:748782299667234966> | No such role found.");
             // const bot = message.guild.me;
             // console.log(bot);
             // let botrole = bot.highestRole;
@@ -193,8 +195,8 @@ module.exports = {
                 message.channel.send(`:white_check_mark: | Successfully updated muted role to <@&${search.id}>`)
             )
         }
-        else if(use == 'defaultrole') {
-            if(set == 'remove') {
+        else if (use == 'defaultrole') {
+            if (set == 'remove') {
                 guildConfig.updateOne({
                     defaultRole: null
                 }).then(
@@ -209,7 +211,7 @@ module.exports = {
             //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
             //     return;
             // }
-            if(!search)  return message.channel.send("<a:no:748782299667234966> | No such role found.");
+            if (!search) return message.channel.send("<a:no:748782299667234966> | No such role found.");
             // const bot = message.guild.members.cache.find(u => u.id == client.user.id);
             // let botrole = bot.highestRole;
             // if(search.calculatedPosition > botrole.calculatedPosition) return message.channel.send('My role is below the given role, please put my role above the mentioned role.');
@@ -219,8 +221,8 @@ module.exports = {
                 message.channel.send(`:white_check_mark: | Successfully updated default role to <@&${search.id}>`)
             )
         }
-        else if(use == 'logs') {
-            if(set == 'remove') {
+        else if (use == 'logs') {
+            if (set == 'remove') {
                 guildConfig.updateOne({
                     logs: null
                 }).then(
@@ -230,15 +232,15 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
+            if (!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 logs: newSet
             }).then(
                 message.channel.send(`:white_check_mark: | Successfully updated logs channel to <#${search.id}>`)
             )
         }
-        else if(use == 'verify') {
-            if(set == 'remove') {
+        else if (use == 'verify') {
+            if (set == 'remove') {
                 guildConfig.updateOne({
                     verify: null
                 }).then(
@@ -248,7 +250,7 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
+            if (!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 verify: newSet
             }).then(
@@ -256,7 +258,7 @@ module.exports = {
             ).then(
                 message.channel.send(
                     "**NOTE** \n" +
-                    "For verification to work properly, you need to have a defaultRole (members role) and a underage role setup." + 
+                    "For verification to work properly, you need to have a defaultRole (members role) and a underage role setup." +
                     "\nThe verification system is an age verification system, with using year as age gate."
                 )
             )
@@ -283,10 +285,10 @@ module.exports = {
                 ]
             };
             search.send({ embed: verifyEmbed });
-                
+
         }
-        else if(use == 'underage') {
-            if(set == 'remove') {
+        else if (use == 'underage') {
+            if (set == 'remove') {
                 guildConfig.updateOne({
                     underage: null
                 }).then(
@@ -303,7 +305,7 @@ module.exports = {
             //     message.channel.send("I cannot assign that role! It is above/same as mine! Please put my role above the role so I can assign it.");
             //     return;
             // }
-            if(!search)  return message.channel.send("<a:no:748782299667234966> | No such role found.");
+            if (!search) return message.channel.send("<a:no:748782299667234966> | No such role found.");
             // const bot = message.guild.members.cache.find(u => u.id == client.user.id);
             // let botrole = bot.highestRole;
             // if(search.calculatedPosition > botrole.calculatedPosition) return message.channel.send('My role is below the given role, please put my role above the mentioned role.');
@@ -313,8 +315,8 @@ module.exports = {
                 message.channel.send(`:white_check_mark: | Successfully updated underage role to <@&${search.id}>`)
             )
         }
-        else if(use == 'ticket') {
-            if(set == 'remove') {
+        else if (use == 'ticket') {
+            if (set == 'remove') {
                 guildConfig.updateOne({
                     ticket_channel: null
                 }).then(
@@ -324,15 +326,15 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
+            if (!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 ticket_channel: newSet
             }).then(
                 message.channel.send(`:white_check_mark: | Successfully updated mod support channel to <#${search.id}>`)
             )
         }
-        else if(use == 'ticketlogs') {
-            if(set == 'remove') {
+        else if (use == 'ticketlogs') {
+            if (set == 'remove') {
                 guildConfig.updateOne({
                     ticket_logs: null
                 }).then(
@@ -344,23 +346,23 @@ module.exports = {
             }
             const newSet = set.substr(2, 18);
             const search = message.guild.channels.cache.find(c => c.id == newSet);
-            if(!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
+            if (!search) return message.channel.send("<a:no:748782299667234966> | No such channel found.");
             guildConfig.updateOne({
                 ticket_logs: newSet
             }).then(
                 message.channel.send(`:white_check_mark: | Successfully updated ticket logging channel to <#${search.id}>`)
             )
         }
-        else if(use == "ghostping") {
-            if(!set) return message.channel.send(`${emoji.x} | Please mention true/false!`);
-            if(set == 'true') {
+        else if (use == "ghostping") {
+            if (!set) return message.channel.send(`${emoji.x} | Please mention true/false!`);
+            if (set == 'true') {
                 await guildConfig.updateOne({
                     ghostPing: true
                 }).then(
                     message.channel.send(`${emoji.done} | Set ghost ping detection to true!`)
                 )
             }
-            else if(set == "false") {
+            else if (set == "false") {
                 await guildConfig.updateOne({
                     ghostPing: false
                 }).then(
@@ -368,12 +370,12 @@ module.exports = {
                 )
             }
         }
-        else if(use == 'maxtickets') {
+        else if (use == 'maxtickets') {
             const premiumUser = await PremiumUsers.findOne({ userId: message.author.id });
-            if(!premiumUser) message.channel.send(`${emoji.x} | You are not a premium user! ${emoji.premium}`);
+            if (!premiumUser) message.channel.send(`${emoji.x} | You are not a premium user! ${emoji.premium}`);
 
-            if(!set) return message.channel.send(`${emoji.x} | Please mention the max number of tickets to set!`);
-            if(set == "remove") {
+            if (!set) return message.channel.send(`${emoji.x} | Please mention the max number of tickets to set!`);
+            if (set == "remove") {
                 message.channel.send(`${emoji.time} Resetting max tickets...`).then(
                     async m => {
                         await guildConfig.updateOne({
@@ -382,23 +384,23 @@ module.exports = {
                             m.edit(`${emoji.done} | Reset Max tickets to 3!`)
                         ).catch(err => m.edit(`${emoji.x} | Something went wrong! Please contact the support server!`).then(console.log(err)))
                     }
-                    
+
                 )
                 return;
             }
-            if(isNaN(set)) return message.channel.send(`${emoji.x} | Max tickets has to be a number!`);
-            if(set > 30) return message.channel.send(`${emoji.x} | Max tickets have to be less than 30!`);
-            if(set < 3) return message.channel.send(`${emoji.x} You know very well why this shouldn't work.`);
+            if (isNaN(set)) return message.channel.send(`${emoji.x} | Max tickets has to be a number!`);
+            if (set > 30) return message.channel.send(`${emoji.x} | Max tickets have to be less than 30!`);
+            if (set < 3) return message.channel.send(`${emoji.x} You know very well why this shouldn't work.`);
             message.channel.send(`${emoji.time} Setting max tickets to ${set}...`).then(
                 async m => {
-                        await guildConfig.updateOne({
-                            maxTickets: parseInt(set)
-                        }).then(
-                            m.edit(`${emoji.done} | Set Max tickets to ${set}`)
-                        )
+                    await guildConfig.updateOne({
+                        maxTickets: parseInt(set)
+                    }).then(
+                        m.edit(`${emoji.done} | Set Max tickets to ${set}`)
+                    )
                 }
             )
-            
+
         }
 
 

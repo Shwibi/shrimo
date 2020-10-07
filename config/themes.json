@@ -1,0 +1,20 @@
+{
+  "HALLOWEEN": {
+    "color": {
+      "hex": "#f2511b",
+      "json": "0xf2511b"
+    },
+    "title": "Halloooweeeeennnn",
+    "lines": [
+      "Spooky!",
+      "Spooktober!",
+      "Ghostly Era Begins!",
+      "EAT SOULS!"
+    ],
+    "description": "This halloween, the best halloween!",
+    "side_color": {
+      "hex": "#f21b83",
+      "json": "0xf21b83"
+    }
+  }
+}

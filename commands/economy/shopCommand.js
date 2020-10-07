@@ -5,11 +5,13 @@ module.exports = {
     help: '<prefix>shop \nSee the Shrimo shop!',
     async execute(message, client) {
 
-        const { emoji } = require('../../config/config.json');
+        const { emoji, theme } = require('../../config/config.json');
+        const themes = require('../../config/themes.json');
+        const indexLine = Math.floor(Math.random() * themes[theme].lines.length);
         const Economy = require('../../models/Economy');
         const ecoUser = await Economy.findOne({ userId: message.author.id });
-        if(!ecoUser) return message.channel.send(`${emoji.x} | Please use the money command once to start your expediture on shrimo points!`);
-        
+        if (!ecoUser) return message.channel.send(`${emoji.x} | Please use the money command once to start your expediture on shrimo points!`);
+
         const money = await ecoUser.get('money');
         const storage = await ecoUser.get('storage');
 
@@ -20,7 +22,7 @@ module.exports = {
             },
             title: "Shop!",
             description: "Here are all the items in the shop!" + ` Your balance: ${money} Shrimos`,
-            color: 0x5efc03,
+            color: themes[theme].color.json,
             fields: [
                 {
                     name: `${emoji.diamond}Special items`,
@@ -40,7 +42,7 @@ module.exports = {
                 }
             ],
             footer: {
-                text: "That's about it for the shop! Type <prefix>buy <option> to buy something! Hover over the option to see more details on how to purchase them!"
+                text: "That's about it for the shop! Type <prefix>buy <option> to buy something! Hover over the option to see more details on how to purchase them! | " + themes[theme].lines[indexLine]
             }
         };
 

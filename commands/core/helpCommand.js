@@ -13,7 +13,9 @@ module.exports = {
             color: 0xfcba03
         };
         message.channel.send({ embed: help });
-        const { emoji } = require('../../config/config.json');
+        const { emoji, theme } = require('../../config/config.json');
+        const themes = require('../../config/themes.json');
+        const indexLine = Math.floor(Math.random() * themes[theme].lines.length);
 
         setTimeout(() => {
             const em = {
@@ -21,8 +23,8 @@ module.exports = {
                     name: client.user.username,
                     icon_url: client.user.displayAvatarURL()
                 },
-                title: "Jk lol here",
-                color: 0xfcba03,
+                title: "Jk lol here | " + themes[theme].title,
+                color: themes[theme].color.json,
                 description: "The prefix for this server is `" + prefix + "`",
                 fields: [
                     {
@@ -86,7 +88,7 @@ module.exports = {
                     }
                 ],
                 footer: {
-                    text: "To get help with a particular command type `" + `${prefix}command help` + "`"
+                    text: "To get help with a particular command type `" + `${prefix}command help` + "` " + themes[theme].lines[indexLine]
                 }
             };
 
