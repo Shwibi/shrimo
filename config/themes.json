@@ -19,7 +19,7 @@
   },
   "CHRISTMAS": {
     "color": {
-      "hex": "#ff2121",
+      "hex": "#0x21ff51",
       "json": "0xff2121"
     },
     "title": "Twees of Chwistmas",
@@ -35,7 +35,7 @@
     ],
     "description": "All I want for christmas is you",
     "side_color": {
-      "hex": "#21ff51",
+      "hex": "#ff2121",
       "json": "0x21ff51"
     }
   }
