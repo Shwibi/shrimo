@@ -27,10 +27,22 @@ module.exports = client => {
         `Are you my homework? Because I don't wanna do you.`,
         `Discord is good.`
     ];
+    const christmas = [
+        "Spread love everywhere you go. Let no one ever come to you without leaving happier. -Mother Teresa",
+        "Hello lovely person/non-person, I hope you have a great day!",
+        "Life is about living, not success or failure. And chocolates. Also chocolates.",
+        "If you ever feel unneeded, you're wrong. I need you.",
+        "I have cookies for you",
+        "Please be careful",
+        "Spend time with your family",
+        "Do you know the secret to happiness? Making others happy.",
+        "Every single person born into this world is special.",
+        "I'm here for you, you can dm me whenever you want to, let it all out. I won't reply, but I'll listen."
+    ]
     setInterval(() => {
-        const index = Math.floor(Math.random() * (activities.length - 1));
-        client.user.setActivity(activities[index]);
+        const index = Math.floor(Math.random() * (christmas.length - 1));
+        client.user.setActivity(christmas[index]);
     }, 30000);
 
-    
+
 }
