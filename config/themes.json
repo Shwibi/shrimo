@@ -16,5 +16,27 @@
       "hex": "#f21b83",
       "json": "0xf21b83"
     }
+  },
+  "CHRISTMAS": {
+    "color": {
+      "hex": "#ff2121",
+      "json": "0xff2121"
+    },
+    "title": "Twees of Chwistmas",
+    "lines": [
+      "Jingle bells!",
+      "Merry Christmas!",
+      "Deck the halls!",
+      "Falalalalalalalalala!",
+      "Santa Claus is here!",
+      "We wish you a merry christmas and a happy new year",
+      "Shwi wishes his best",
+      "May you have cookies and milk"
+    ],
+    "description": "All I want for christmas is you",
+    "side_color": {
+      "hex": "#21ff51",
+      "json": "0x21ff51"
+    }
   }
 }
