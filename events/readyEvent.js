@@ -42,7 +42,7 @@ module.exports = client => {
     setInterval(() => {
         const index = Math.floor(Math.random() * (christmas.length - 1));
         client.user.setActivity(christmas[index]);
-    }, 30000);
+    }, 60000);
 
 
 }
