@@ -13,7 +13,7 @@ module.exports = {
     const guildUser = message.guild.members.cache.find(m => m.id == user.id);
     if (guildUser) {
 
-      if (guildUser.roles.highest.position >= message.member.roles.highest.position) return message.channel.send(`${emoji.x} Can't ban a user with a higher role than yours!`);
+      if (guildUser.roles.highest.position >= message.member.roles.highest.position) return message.channel.send(`${emoji.x} Can't ban a user with a higher or equal role to yours!`);
       const reason = args.slice(2).join(" ") || "No reason provided";
       guildUser.ban().then(
         message.channel.send(`${emoji.ban} Banned <@${guildUser.id}>!`)
