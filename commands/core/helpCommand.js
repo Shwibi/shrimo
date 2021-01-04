@@ -82,8 +82,8 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `${emoji.amalgam} Join Rhyme Wars!`,
-                        value: `[»» Join ««](https://discord.gg/AEXRbhR)`,
+                        name: `${emoji.amalgam} <Your ad here>!`,
+                        value: `Place your ad here! Contact Shwi#6569`,
                         inline: true
                     }
                 ],
