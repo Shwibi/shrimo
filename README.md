@@ -2,18 +2,21 @@
 ## Alright so, this is Shwi here, with the source code for SHRIMO THE BOT
 ---
 
+#NOTE:
+THE BOT IS NO LONGER RUNNING. THIS IS JUST THE SOURCE CODE.
+
+##Below is the old readme:
 The bot is a multi purpose fun and mod actions bot, with features such as ticketing, custom prefix, welcome and age verification system, muting, and more!
 This is the future!
 <br>
 [Support Server](https://discord.gg/FtJ3QGc)
 <br>
-[Invite Bot to your Guild](https://discord.com/oauth2/authorize?client_id=746202084147331092&scope=bot&permissions=8)
+==Bot invite removed
 
 ---
 ### Note
 
-This is a solo project, I am the only one owning this project.
-KeylAmi, the owner&admin of the Official TKOR server helped me with the ticketing system, so all the credit for the ticket goes to him, not me. 
+This is a team project, with ToasterLLC as a second member.
 
 ### Privacy
 
@@ -29,6 +32,10 @@ No user information except checking for users in a guild using their public user
 2. Ticketing-
     Open tickets using `<prefix>ticket create` in ticket channel, close tickets using `<prefix>ticket close #channel-name` in ticket channel, 
     and remove ticket count using `<prefix>ticket closed @user` and check tickets open using `<prefix>tickets @user`
+3. Help-
+    Use the `<prefix>help` command to get all the feature list.
+4. Settings
+    `<prefix> settings <setting> <set>` to set/configure your guild
     
 THERE ARE MORE FEATURES, BUT THESE ARE THE ONES WHICH ARE THE MOST IMPORTANT ONES, AND NEED TO BE NOTED HERE.
 <br/>
