@@ -1,5 +1,5 @@
 {
-  "name": "shwi-bot",
+  "name": "shrimo",
   "version": "1.0.0",
   "description": "",
   "main": "bot.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shwibi/shwi-bot.git"
+    "url": "git+https://github.com/Shwibi/shrimo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Shwibi/shwi-bot/issues"
+    "url": "https://github.com/Shwibi/shrimo/issues"
   },
-  "homepage": "https://github.com/Shwibi/shwi-bot#readme",
+  "homepage": "https://github.com/Shwibi/shrimo#readme",
   "dependencies": {
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
