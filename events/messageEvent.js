@@ -162,6 +162,7 @@ module.exports = async (client, message) => {
     const config = require('../config/config.json');
     
     if(message.author.bot) return;
+    if(message.guild.id !== "746213635336044665") return;
     const args = message.content.toLowerCase().split(" ");
     if(!args[0].startsWith(prefix)) return;
     const cmd = args[0].slice(prefix.length);
