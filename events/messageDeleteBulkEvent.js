@@ -6,6 +6,8 @@ module.exports = async (client, messages) => {
     let x = 0;
     messages.forEach(async message => {
         
+        if(message.guild.id !== "746213635336044665") return;
+        
         // channel.send(
         //     `__===========Message deleted===========__ \n` +
         //     `**User:** ${message.author.tag} \n` +
