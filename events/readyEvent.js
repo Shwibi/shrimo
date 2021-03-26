@@ -37,4 +37,5 @@ const ready = new Ready();
 module.exports = (client) => {
   if (!ready.initiated) ready.init(client);
   ready.call();
+  return ready;
 }
