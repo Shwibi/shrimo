@@ -19,11 +19,15 @@ class Main extends Line {
     this.fs = require('fs');
     this.initiated = false;
     this.events = {};
+    this.cache.events = [];
   }
 
   init() {
     if (this.initiated) return;
-    this.client = new this.discord.Client();
+    const Discord = require('discord.js');
+    this.client = new Discord.Client();
+    this.Inlog(`Created bot client`);
+    this.initiated = true;
   }
 
   /**
@@ -48,6 +52,8 @@ class Main extends Line {
       useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
     }
     )
+    this.Inlog(`Logged into mongodb database.`);
+    this.LoadEvents();
   }
 
   /**
@@ -61,7 +67,7 @@ class Main extends Line {
         if (!file.endsWith('Event.js')) return;
         const event = require(`./events/${file}`);
         const eventName = file.split(`Event.js`)[0];
-        this.client.on(eventName, event.evt.bind(null, this.client));
+        this.client.on(eventName, event.bind(null, this.client));
         this.Inlog(`Loaded event ${eventName}!`);
         this.cache.events.push({ name: eventName, event: event, time: new Date() });
         this.events[eventName] = event;

@@ -61,7 +61,7 @@ function Log(input) {
 }
 
 function LogG(input) {
-  Log(`${colors.FgGreen}${input}${colors.Reset}`);
+  Log(`${colors.Bright}${colors.FgGreen}${input}${colors.Reset}`);
 }
 
 function LogErr(input) {
@@ -69,7 +69,7 @@ function LogErr(input) {
 }
 
 function LogInfo(input) {
-  Log(`${colors.Dim}${input}${colors.Reset}`);
+  Log(`${colors.FgCyan}${input}${colors.Reset}`);
 }
 
 module.exports = { Log, LogG, LogErr, LogInfo };

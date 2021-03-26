@@ -15,7 +15,8 @@ class Line {
    */
   constructor(name) {
     this.name = name;
-    this.cache = {};
+    this.cache = { logs: [] };
+    this.logs = [];
     this.cache.created = new Cache(`Created new line ${this.name}!`, { line: this });
   }
 
@@ -25,7 +26,7 @@ class Line {
    */
   Inlog(message) {
     this.logs.push({ msg: message, at: new Date() });
-    this.cache.logs.push(new Cache(`Logged an invoice on line ${this.name}.`, { line: this, message: message }));
+    this.cache.logs.push(new Cache(`Logged an invoice on line ${this.name}: ${message}`, { line: this, message: message }));
   }
 
 }

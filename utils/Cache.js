@@ -23,7 +23,7 @@ class Cache {
   }
 
   Log() {
-    log.Log(`(Cache/${this.id}) ${this.message}`);
+    log.LogInfo(`(Cache/${this.id}) ${this.message}`);
   }
 
   get info() {

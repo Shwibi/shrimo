@@ -1,7 +1,6 @@
 const Line = require(`../utils/Line`);
 const Log = require(`../utils/Log`);
 const Cache = require(`../utils/Cache`);
-
 class Ready extends Line {
 
   /**
@@ -35,9 +34,7 @@ class Ready extends Line {
 }
 
 const ready = new Ready();
-module.exports.evt = (client) => {
+module.exports = (client) => {
   if (!ready.initiated) ready.init(client);
   ready.call();
 }
-
-module.exports.line = ready;
