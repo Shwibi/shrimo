@@ -3,7 +3,7 @@
 ---
 
 #NOTE:
-THE BOT IS NO LONGER RUNNING. THIS IS JUST THE SOURCE CODE.
+This is the older version of the bot; The latest version can be found in the source directory.
 
 ##Below is the old readme:
 The bot is a multi purpose fun and mod actions bot, with features such as ticketing, custom prefix, welcome and age verification system, muting, and more!
