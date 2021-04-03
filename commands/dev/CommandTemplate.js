@@ -2,9 +2,8 @@
  * Template for commands
  */
 
-const Discord = require("discord.js");
-const CommandTendril = require(`../dev/CommandTendril`);
-const commandName = 'ping';
+const CommandTendril = require(`./CommandTendril`);
+const commandName = 'CommandName';
 class Command extends CommandTendril {
 
   /**
@@ -19,24 +18,14 @@ class Command extends CommandTendril {
    */
   call(message) {
 
-    if (!this.initiated) return 'Invalid request! Command not initiated!';
+    if (!this.initiated) {
+      this.Inlog(`Invalid request! ${commandName} command not initiated!`);
+      return `Invalid request! ${commandName} command not initiated!`;
+    };
 
     const msgLow = message.content.toLowerCase();
     const args = msgLow.split(/\s/);
     const cmd = args.shift().slice(this.client.prefix.length);
-
-    let pingEmbed = new Discord.MessageEmbed()
-      .setTitle(`Ping!`)
-      .setDescription(`Pingu`)
-      .addField(`Client API`, `${this.client.ws.ping}ms`)
-      .setColor('RANDOM')
-      .setTimestamp();
-    message.channel.send(pingEmbed).then(
-      msg => {
-        pingEmbed.addField(`Latency`, `${msg.createdTimestamp - message.createdTimestamp}ms`);
-        msg.edit(pingEmbed);
-      }
-    );
 
 
   }
@@ -47,8 +36,8 @@ const command = new Command(); // Command instance
 const cappedName = commandName.substr(0, 1).toUpperCase() + commandName.substr(1, commandName.length);
 module.exports = {
   name: commandName, // Name of the command
-  description: `Know the latency of the bot.`, // Command description
-  cappedName: cappedName,
+  description: cappedName + ' command', // Command description
+  cappedname: cappedName,
   usage: commandName, // How to use the command, prefix added automatically
   example: commandName, // Example on how to use, prefix added auto
   defaultHelp: true, // Whether to use the default help
